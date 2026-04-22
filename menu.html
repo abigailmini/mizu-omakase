@@ -102,77 +102,78 @@
 }
 .courses-head h2 .it { font-style: italic; color: var(--ember); }
 
-.course-row {
+.menu-cards {
   display: grid;
-  grid-template-columns: 80px 1fr 1.3fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--hair);
-  align-items: center;
+  margin-top: 60px;
 }
-.course-row:first-child { border-top: 1px solid var(--hair-strong); }
-.menu-section-head {
+.menu-card {
+  border: 1px solid var(--hair);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.menu-card-featured {
+  border-color: var(--ember);
+}
+.menu-card-top {
   text-align: center;
-  padding: 32px 0 20px;
-  border-top: 1px solid var(--hair-strong);
-  margin-top: 40px;
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--hair);
 }
-.menu-section-head:first-of-type {
-  border-top: none;
-  margin-top: 0;
-  padding-top: 0;
-}
-.menu-section-head h2 {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(28px, 3vw, 42px);
-  color: var(--rice);
-  margin: 14px 0 8px;
-  letter-spacing: -0.01em;
-}
-.menu-section-head .subtitle {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 15px;
-  color: var(--bone-dim);
-}
-.course-num-big {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-style: italic;
+.menu-card-kanji {
+  font-family: var(--jp);
   font-size: 48px;
   color: var(--ember);
   line-height: 1;
+  margin-bottom: 8px;
 }
-.course-meta .stage {
+.menu-card-name {
   font-family: var(--sans);
-  font-size: 10px;
-  letter-spacing: 0.32em;
+  font-size: 11px;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--bone-dim);
   margin-bottom: 8px;
 }
-.course-meta h4 {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: 30px;
-  color: var(--rice);
-  letter-spacing: -0.005em;
-  margin-bottom: 4px;
-}
-.course-meta .jp {
-  font-family: var(--jp);
-  font-size: 16px;
-  color: var(--ember);
-  letter-spacing: 0.1em;
-}
-.course-desc {
+.menu-card-sub {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 17px;
-  line-height: 1.6;
+  font-size: 13px;
+  color: var(--bone-dim);
+  margin-bottom: 12px;
+}
+.menu-card-price {
+  font-family: var(--serif);
+  font-size: 36px;
+  color: var(--rice);
+  font-weight: 300;
+}
+.menu-card-price sup { font-size: 0.5em; color: var(--bone-dim); }
+.menu-card-courses {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px 0;
+  flex: 1;
+}
+.menu-card-courses li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--hair);
+  font-family: var(--serif);
+  font-size: 15px;
   color: var(--bone);
-  max-width: 42ch;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.jp-sm {
+  font-family: var(--jp);
+  font-size: 12px;
+  color: var(--ember);
+  letter-spacing: 0.05em;
 }
 .gallery-slider { width: 100%; overflow: hidden; position: relative; }
 .slider-wrap { position: relative; overflow: hidden; }
@@ -299,7 +300,7 @@
 
 @media (max-width: 900px) {
   .menu-intro-grid { grid-template-columns: 1fr; gap: 40px; }
-  .course-row { grid-template-columns: 1fr; gap: 20px; padding: 32px 0; }
+  .menu-cards { grid-template-columns: 1fr; gap: 32px; }
   .pair-inner, .supp-grid { grid-template-columns: 1fr; gap: 40px; }
 }
 </style>
@@ -362,91 +363,76 @@
     <h2>Choose your <span class="it">experience</span>.</h2>
   </div>
 
-  <!-- ═══ UTEKI ═══ -->
-  <div class="menu-section-head" style="border-top:none; margin-top:0; padding-top:0;">
-    <div class="eyebrow">雨 · UTEKI</div>
-    <h2>RM 279<sup style="font-size:0.5em;">++</sup></h2>
-    <p class="subtitle">The entry into omakase</p>
-  </div>
+  <div class="menu-cards">
 
-  <div class="course-row">
-    <div class="course-num-big">01</div>
-    <div class="course-meta">
-      <div class="stage">First Course</div>
-      <h4>Appetizer</h4>
-      <div class="jp">先付</div>
+    <!-- UTEKI -->
+    <div class="menu-card">
+      <div class="menu-card-top">
+        <div class="menu-card-kanji">雨</div>
+        <div class="menu-card-name">UTEKI</div>
+        <div class="menu-card-price">RM 279<sup>++</sup></div>
+      </div>
+      <ul class="menu-card-courses">
+        <li>Appetizer <span class="jp-sm">先付</span></li>
+        <li>Sashimi <span class="jp-sm">向付</span></li>
+        <li>Seasonal Dish <span class="jp-sm">旬の一品</span></li>
+        <li>Yakimono <span class="jp-sm">焼物</span></li>
+        <li>Nimono <span class="jp-sm">煮物</span></li>
+        <li>Sushi 5 Kind <span class="jp-sm">鮨五種</span></li>
+        <li>Tomewan (Soup) <span class="jp-sm">止椀</span></li>
+        <li>Dessert <span class="jp-sm">甘味</span></li>
+      </ul>
+      <a href="https://reservation.umai.io/en/widget/mizu-omakase" class="btn btn-solid" style="width:100%;justify-content:center;margin-top:auto;">Reserve</a>
     </div>
-    <div class="course-desc">A single jewel of the season, arriving quietly before the evening begins.</div>
-  </div>
 
-  <div class="course-row">
-    <div class="course-num-big">02</div>
-    <div class="course-meta">
-      <div class="stage">Second Course</div>
-      <h4>Sashimi</h4>
-      <div class="jp">向付</div>
+    <!-- KEIRYU -->
+    <div class="menu-card menu-card-featured">
+      <div class="menu-card-top">
+        <div class="menu-card-kanji">渓</div>
+        <div class="menu-card-name">KEIRYU</div>
+        <div class="menu-card-sub">A Gentle Uni Experience</div>
+        <div class="menu-card-price">RM 479<sup>++</sup></div>
+      </div>
+      <ul class="menu-card-courses">
+        <li>Owan <span class="jp-sm">椀</span></li>
+        <li>Appetizer <span class="jp-sm">先付</span></li>
+        <li>Sashimi <span class="jp-sm">向付</span></li>
+        <li>Seasonal Dish <span class="jp-sm">旬の料理</span></li>
+        <li>Yakimono <span class="jp-sm">焼物</span></li>
+        <li>Sushi 3 Kind <span class="jp-sm">鮨三貫</span></li>
+        <li>Uni Tasting <span class="jp-sm">雲丹食べ比べ</span></li>
+        <li>Tomewan <span class="jp-sm">止椀</span></li>
+        <li>Dessert <span class="jp-sm">甘味</span></li>
+      </ul>
+      <a href="https://reservation.umai.io/en/widget/mizu-omakase" class="btn btn-solid" style="width:100%;justify-content:center;margin-top:auto;">Reserve</a>
     </div>
-    <div class="course-desc">Ocean-fresh cuts laid bare, each slice a quiet conversation with the sea.</div>
-  </div>
 
-  <div class="course-row">
-    <div class="course-num-big">03</div>
-    <div class="course-meta">
-      <div class="stage">Third Course</div>
-      <h4>Seasonal Dish</h4>
-      <div class="jp">旬の一品</div>
+    <!-- OGAWA -->
+    <div class="menu-card">
+      <div class="menu-card-top">
+        <div class="menu-card-kanji">川</div>
+        <div class="menu-card-name">OGAWA</div>
+        <div class="menu-card-sub">A Sea Urchin Omakase Experience</div>
+        <div class="menu-card-price">RM 679<sup>++</sup></div>
+      </div>
+      <ul class="menu-card-courses">
+        <li>Welcome Drink <span class="jp-sm">食前酒</span></li>
+        <li>Owan <span class="jp-sm">椀</span></li>
+        <li>Appetizer (3 kinds) <span class="jp-sm">先付三品</span></li>
+        <li>Sashimi <span class="jp-sm">造里</span></li>
+        <li>Uni Bite <span class="jp-sm">雲丹一品</span></li>
+        <li>Yakimono <span class="jp-sm">焼き物</span></li>
+        <li>Nimono <span class="jp-sm">煮物</span></li>
+        <li>Sashimi (2nd) <span class="jp-sm">造里（二）</span></li>
+        <li>Uni Tasting <span class="jp-sm">雲丹食べ比べ</span></li>
+        <li>Hand Roll <span class="jp-sm">手巻き</span></li>
+        <li>Soup <span class="jp-sm">止椀</span></li>
+        <li>Palate Cleanser <span class="jp-sm">お口直し</span></li>
+        <li>Dessert <span class="jp-sm">甘味</span></li>
+      </ul>
+      <a href="https://reservation.umai.io/en/widget/mizu-omakase" class="btn btn-solid" style="width:100%;justify-content:center;margin-top:auto;">Reserve</a>
     </div>
-    <div class="course-desc">A fleeting expression of today's market, coaxed into something memorable.</div>
-  </div>
 
-  <div class="course-row">
-    <div class="course-num-big">04</div>
-    <div class="course-meta">
-      <div class="stage">Fourth Course</div>
-      <h4>Yakimono</h4>
-      <div class="jp">焼物</div>
-    </div>
-    <div class="course-desc">Kissed by fire until the skin blisters and caramelises into gold.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">05</div>
-    <div class="course-meta">
-      <div class="stage">Fifth Course</div>
-      <h4>Nimono</h4>
-      <div class="jp">煮物</div>
-    </div>
-    <div class="course-desc">Slow-simmered in dashi until everything tender surrenders to the broth.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">06</div>
-    <div class="course-meta">
-      <div class="stage">Sixth Course</div>
-      <h4>Sushi 5 Kind</h4>
-      <div class="jp">鮨五種</div>
-    </div>
-    <div class="course-desc">Five nigiri, five moods — the counter's own quiet composition.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">07</div>
-    <div class="course-meta">
-      <div class="stage">Seventh Course</div>
-      <h4>Tomewan</h4>
-      <div class="jp">止椀</div>
-    </div>
-    <div class="course-desc">A warming bowl to close the savoury chapter, gentle and pure.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">08</div>
-    <div class="course-meta">
-      <div class="stage">Finale</div>
-      <h4>Dessert</h4>
-      <div class="jp">甘味</div>
-    </div>
-    <div class="course-desc">A small sweetness to carry you out gently into the night.</div>
   </div>
 
   <section class="gallery-slider" style="margin: 80px 0;">
@@ -491,250 +477,6 @@
     timer = setInterval(() => go(cur+1), 4000);
   })();
   </script>
-
-  <!-- ═══ KEIRYU ═══ -->
-  <div class="menu-section-head">
-    <div class="eyebrow">渓 · KEIRYU</div>
-    <h2>RM 479<sup style="font-size:0.5em;">++</sup></h2>
-    <p class="subtitle">A Gentle Uni Experience</p>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">01</div>
-    <div class="course-meta">
-      <div class="stage">First Course</div>
-      <h4>Owan</h4>
-      <div class="jp">椀</div>
-    </div>
-    <div class="course-desc">A clear broth that opens the senses with restraint and precision.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">02</div>
-    <div class="course-meta">
-      <div class="stage">Second Course</div>
-      <h4>Appetizer</h4>
-      <div class="jp">先付</div>
-    </div>
-    <div class="course-desc">Season's first notes arranged with care on the edge of the lacquer.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">03</div>
-    <div class="course-meta">
-      <div class="stage">Third Course</div>
-      <h4>Sashimi</h4>
-      <div class="jp">向付</div>
-    </div>
-    <div class="course-desc">Premium cuts drawn straight from the morning's arrival, unadorned.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">04</div>
-    <div class="course-meta">
-      <div class="stage">Fourth Course</div>
-      <h4>Seasonal Dish</h4>
-      <div class="jp">旬の料理</div>
-    </div>
-    <div class="course-desc">The chef's response to what the season insisted on offering today.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">05</div>
-    <div class="course-meta">
-      <div class="stage">Fifth Course</div>
-      <h4>Yakimono</h4>
-      <div class="jp">焼物</div>
-    </div>
-    <div class="course-desc">Flame-touched, skin crisped, resting in its own lingering warmth.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">06</div>
-    <div class="course-meta">
-      <div class="stage">Sixth Course</div>
-      <h4>Sushi 3 Kind</h4>
-      <div class="jp">鮨三貫</div>
-    </div>
-    <div class="course-desc">Three considered nigiri — the counter speaking at its most precise.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">07</div>
-    <div class="course-meta">
-      <div class="stage">Seventh Course</div>
-      <h4>Uni Tasting</h4>
-      <div class="jp">雲丹食べ比べ</div>
-    </div>
-    <div class="course-desc">A gentle introduction to the sea's most elusive and luminous treasure.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">08</div>
-    <div class="course-meta">
-      <div class="stage">Eighth Course</div>
-      <h4>Tomewan</h4>
-      <div class="jp">止椀</div>
-    </div>
-    <div class="course-desc">The final broth, soft and resolving, a quiet full stop to the savoury act.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">09</div>
-    <div class="course-meta">
-      <div class="stage">Finale</div>
-      <h4>Dessert</h4>
-      <div class="jp">甘味</div>
-    </div>
-    <div class="course-desc">Something cool and delicate to end the evening with grace.</div>
-  </div>
-
-  <!-- ═══ OGAWA ═══ -->
-  <div class="menu-section-head">
-    <div class="eyebrow">川 · OGAWA</div>
-    <h2>RM 679<sup style="font-size:0.5em;">++</sup></h2>
-    <p class="subtitle">A Sea Urchin Omakase Experience</p>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">01</div>
-    <div class="course-meta">
-      <div class="stage">Opening</div>
-      <h4>Welcome Drink</h4>
-      <div class="jp">食前酒</div>
-    </div>
-    <div class="course-desc">Begin with something sparkling — the evening opening its arms.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">02</div>
-    <div class="course-meta">
-      <div class="stage">Second Course</div>
-      <h4>Owan</h4>
-      <div class="jp">椀</div>
-    </div>
-    <div class="course-desc">The dashi here arrives as ceremony, a bowl of pure intention.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">03</div>
-    <div class="course-meta">
-      <div class="stage">Third Course</div>
-      <h4>Appetizer</h4>
-      <div class="jp">先付三品</div>
-    </div>
-    <div class="course-desc">Three small studies in contrast — bitter, rich, and bright.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">04</div>
-    <div class="course-meta">
-      <div class="stage">Fourth Course</div>
-      <h4>Sashimi</h4>
-      <div class="jp">造里</div>
-    </div>
-    <div class="course-desc">The first cut of the sea, laid with reverence on chilled stone.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">05</div>
-    <div class="course-meta">
-      <div class="stage">Fifth Course</div>
-      <h4>Sashimi</h4>
-      <div class="jp">造里（二）</div>
-    </div>
-    <div class="course-desc">A second dialogue with the ocean, deeper and more expressive.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">06</div>
-    <div class="course-meta">
-      <div class="stage">Sixth Course</div>
-      <h4>Uni Bite</h4>
-      <div class="jp">雲丹一品</div>
-    </div>
-    <div class="course-desc">A single mouthful of Hokkaido's finest — gold, briny, and fleeting.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">07</div>
-    <div class="course-meta">
-      <div class="stage">Seventh Course</div>
-      <h4>Yakimono</h4>
-      <div class="jp">焼き物</div>
-    </div>
-    <div class="course-desc">Flame disciplines the surface while the interior remains yielding.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">08</div>
-    <div class="course-meta">
-      <div class="stage">Eighth Course</div>
-      <h4>Nimono</h4>
-      <div class="jp">煮物</div>
-    </div>
-    <div class="course-desc">Patient simmering yields a depth that only time and dashi can build.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">09</div>
-    <div class="course-meta">
-      <div class="stage">Ninth Course</div>
-      <h4>Sushi</h4>
-      <div class="jp">鮨</div>
-    </div>
-    <div class="course-desc">Nigiri pressed at the counter's edge, warm rice meeting cold fish.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">10</div>
-    <div class="course-meta">
-      <div class="stage">Tenth Course</div>
-      <h4>Uni Tasting</h4>
-      <div class="jp">雲丹食べ比べ</div>
-    </div>
-    <div class="course-desc">Compare origins, compare moods — the sea rendered in spectrum.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">11</div>
-    <div class="course-meta">
-      <div class="stage">Eleventh Course</div>
-      <h4>Hand Roll</h4>
-      <div class="jp">手巻き</div>
-    </div>
-    <div class="course-desc">Nori snapping, rice spilling — the informality of pure pleasure.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">12</div>
-    <div class="course-meta">
-      <div class="stage">Twelfth Course</div>
-      <h4>Soup</h4>
-      <div class="jp">止椀</div>
-    </div>
-    <div class="course-desc">A closing broth to anchor the ritual before stillness arrives.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">13</div>
-    <div class="course-meta">
-      <div class="stage">Thirteenth Course</div>
-      <h4>Palate Cleanser</h4>
-      <div class="jp">お口直し</div>
-    </div>
-    <div class="course-desc">A breath between acts — cool, acidic, precise.</div>
-  </div>
-
-  <div class="course-row">
-    <div class="course-num-big">14</div>
-    <div class="course-meta">
-      <div class="stage">Finale</div>
-      <h4>Dessert</h4>
-      <div class="jp">甘味</div>
-    </div>
-    <div class="course-desc">The evening's final note, soft and unhurried, sweetly earned.</div>
-  </div>
 
 </section>
 
