@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About · Mizu Omakase</title>
+<link rel="stylesheet" href="shared.css" />
+<style>
+.page-hero {
+  padding: 200px var(--pad) 120px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 80px;
+  align-items: end;
+  max-width: 1600px;
+  margin: 0 auto;
+  position: relative;
+}
+.page-hero::before {
+  content: '水';
+  position: absolute;
+  right: -40px; top: 140px;
+  font-family: var(--jp);
+  font-size: 520px;
+  color: var(--ember);
+  opacity: 0.05;
+  line-height: 0.8;
+}
+.page-hero h1 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(52px, 8vw, 140px);
+  line-height: 0.95;
+  color: var(--rice);
+  letter-spacing: -0.02em;
+  position: relative;
+}
+.page-hero h1 .it { font-style: italic; color: var(--ember); }
+.page-hero .kicker {
+  font-family: var(--jp);
+  font-size: 22px;
+  color: var(--ember);
+  letter-spacing: 0.3em;
+  margin-bottom: 28px;
+}
+.page-hero .side p {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--bone);
+  max-width: 42ch;
+}
+.page-hero .side p + p { margin-top: 20px; }
+
+.story {
+  padding: 120px var(--pad);
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 100px;
+  align-items: start;
+}
+.story-img {
+  aspect-ratio: 3/4;
+  position: sticky; top: 120px;
+  overflow: hidden;
+}
+.story-img img { width: 100%; height: 100%; object-fit: cover; }
+.story-col h2 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(36px, 4vw, 60px);
+  line-height: 1.1;
+  color: var(--rice);
+  margin: 40px 0 20px;
+  letter-spacing: -0.01em;
+}
+.story-col h2:first-child { margin-top: 0; }
+.story-col h2 .it { font-style: italic; color: var(--ember); }
+.story-col p {
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.8;
+  color: var(--bone);
+  margin-bottom: 18px;
+  max-width: 58ch;
+}
+.story-col .kanji-break {
+  font-family: var(--jp);
+  font-size: 54px;
+  color: var(--ember);
+  text-align: center;
+  margin: 80px 0;
+  letter-spacing: 0.4em;
+  opacity: 0.7;
+}
+
+.values {
+  background: var(--ink-2);
+  border-top: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+  padding: 120px var(--pad);
+}
+.values-inner { max-width: 1400px; margin: 0 auto; }
+.values-head {
+  text-align: center;
+  margin-bottom: 80px;
+}
+.values-head h2 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(36px, 4.5vw, 72px);
+  color: var(--rice);
+  margin-top: 20px;
+  letter-spacing: -0.01em;
+}
+.values-head h2 .it { font-style: italic; color: var(--ember); }
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.value-card {
+  padding: 48px 28px;
+  border-left: 1px solid var(--hair);
+}
+.value-card .jp {
+  font-family: var(--jp);
+  font-size: 48px;
+  color: var(--ember);
+  margin-bottom: 24px;
+  line-height: 1;
+}
+.value-card h4 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 26px;
+  color: var(--rice);
+  margin-bottom: 12px;
+}
+.value-card .romaji {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 18px;
+}
+.value-card p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--bone-dim);
+}
+
+.gallery-rail {
+  padding: 120px 0;
+  overflow: hidden;
+}
+.gallery-strip {
+  display: flex;
+  gap: 24px;
+  animation: scrollL 60s linear infinite;
+  width: max-content;
+  padding-left: 24px;
+}
+@keyframes scrollL {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.gallery-strip img {
+  height: 480px;
+  width: auto;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.about-cta {
+  padding: 120px var(--pad);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.about-cta h2 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(36px, 4.5vw, 72px);
+  color: var(--rice);
+  line-height: 1.1;
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+}
+.about-cta h2 .it { font-style: italic; color: var(--ember); }
+.about-cta p {
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.7;
+  color: var(--bone);
+  margin-bottom: 40px;
+}
+
+@media (max-width: 900px) {
+  .page-hero, .story, .values-grid { grid-template-columns: 1fr; gap: 40px; }
+  .story-img { position: relative; top: 0; }
+  .values-grid { gap: 0; }
+  .value-card { border-left: none; border-top: 1px solid var(--hair); }
+}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<nav class="nav" id="nav">
+  <div class="nav-left">
+    <a href="home.html" class="navlink">Home</a>
+    <a href="about.html" class="navlink active">About</a>
+    <a href="menu.html" class="navlink">Menu</a>
+    <a href="contact.html" class="navlink">Contact</a>
+  </div>
+  <a href="home.html" class="brand-mark"><span class="mark-kanji">水</span><span class="mark-wd">Mizu</span></a>
+  <div class="nav-right">
+    <a href="#" class="navlink">EN / 日本語</a>
+    <a href="https://lounge.oddle.me/en_SG/mizuomakase" class="navlink nav-reserve" style="color: var(--ember); border: 1px solid var(--ember); padding: 10px 18px;">Reserve</a>
+  </div>
+</nav>
+
+<div class="reserve-dock">
+  <div class="dock-label">Counter Seating<strong>Reserve Tonight</strong></div>
+  <a href="https://lounge.oddle.me/en_SG/mizuomakase" class="dock-cta">Book a Seat <span>→</span></a>
+</div>
+
+<section class="page-hero">
+  <div>
+    <div class="kicker">水 · About Mizu</div>
+    <h1>A quiet <span class="it">devotion</span><br/>to the craft.</h1>
+  </div>
+  <div class="side">
+    <p>Mizu — "water" in Japanese — is the foundation of sushi, the element that carries the rice, the broth, the ice, the breath of every season.</p>
+    <p>It is also our promise: to move with the clarity and patience of water, allowing the finest ingredients to speak for themselves.</p>
+  </div>
+</section>
+
+<section class="story">
+  <div class="story-img">
+    <img src="images/dish-17.jpg" alt="Chef" />
+  </div>
+  <div class="story-col">
+    <h2>A counter for <span class="it">twelve</span>.</h2>
+    <p>We built Mizu with a single question in mind: what would it feel like to dine as though you were the only guest in the room? The answer — and the restaurant — is a curved hinoki counter for twelve, where each seat carries the same sightline to the chef's hands, to the fire, to the ice, to the moment when a piece of fish becomes something more.</p>
+    <p>There are no tables. There is no menu. There is only tonight, and the quiet agreement between chef and guest: I leave it up to you.</p>
+
+    <div class="kanji-break">一 期 一 会</div>
+
+    <h2>Chef <span class="it">Howl</span>.</h2>
+    <p>Chef Howl began his apprenticeship at seventeen, scrubbing cutting boards in a small Tokyo itamae before the first light of each morning. Over the next two decades he trained in Edomae technique in Tokyo, Kyoto kaiseki sensibility in Kyoto, and modern omakase restraint in Osaka — before returning to Malaysia to build a counter of his own.</p>
+    <p>His style is neither traditionalist nor modern; it is personal. An unhurried hand. A deliberate cut. Seasoning so precise you notice its absence more than its presence. He sources from Toyosu twice weekly, always travels with his own knives, and has never used a timer in a kitchen.</p>
+
+    <div class="kanji-break">職 人</div>
+
+    <h2>The <span class="it">season</span> is our menu.</h2>
+    <p>Every course served at Mizu answers to the season. In spring, the first sakura salt and mountain vegetables. In summer, cool hamo and icefish. In autumn, matsutake and aged kinmedai. In winter, blue-fin at its heaviest fat. What arrives on the morning of your visit decides what appears on your plate that evening — never the other way around.</p>
+    <p>It is a practice of listening: to the fishermen, to the farmers, to the weather, to the day itself. It asks something of our guests, too — a willingness to arrive without expectation, and to leave having been surprised.</p>
+  </div>
+</section>
+
+<section class="values">
+  <div class="values-inner">
+    <div class="values-head">
+      <span class="eyebrow">The Four Virtues · 四 徳</span>
+      <h2>Principles we work <span class="it">beside</span>.</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="jp">旬</div>
+        <div class="romaji">Shun</div>
+        <h4>Seasonality</h4>
+        <p>The truest flavour of every ingredient exists in a small window of time. We honour that window and plan our lives around it.</p>
+      </div>
+      <div class="value-card">
+        <div class="jp">間</div>
+        <div class="romaji">Ma</div>
+        <h4>The Pause</h4>
+        <p>What is left unsaid, unserved, or unfilled carries as much intention as what is given. Pacing is its own flavour.</p>
+      </div>
+      <div class="value-card">
+        <div class="jp">礼</div>
+        <div class="romaji">Rei</div>
+        <h4>Respect</h4>
+        <p>For the fisherman who woke before dawn. For the grain of rice. For the guest whose evening is now in our hands.</p>
+      </div>
+      <div class="value-card">
+        <div class="jp">誠</div>
+        <div class="romaji">Makoto</div>
+        <h4>Sincerity</h4>
+        <p>No gesture performed for applause. No technique chosen for spectacle. Every action, quietly, what the course requires.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery-rail">
+  <div class="gallery-strip">
+    <img src="images/hero-counter.jpg" alt="" />
+    <img src="images/dish-23.jpg" alt="" />
+    <img src="images/dish-80.jpg" alt="" />
+    <img src="images/dish-45.jpg" alt="" />
+    <img src="images/dish-9.jpg" alt="" />
+    <img src="images/dish-54.jpg" alt="" />
+    <img src="images/dish-46.jpg" alt="" />
+    <img src="images/dish-17.jpg" alt="" />
+    <!-- duplicate for seamless loop -->
+    <img src="images/hero-counter.jpg" alt="" />
+    <img src="images/dish-23.jpg" alt="" />
+    <img src="images/dish-80.jpg" alt="" />
+    <img src="images/dish-45.jpg" alt="" />
+    <img src="images/dish-9.jpg" alt="" />
+    <img src="images/dish-54.jpg" alt="" />
+    <img src="images/dish-46.jpg" alt="" />
+    <img src="images/dish-17.jpg" alt="" />
+  </div>
+</section>
+
+<section class="about-cta">
+  <div class="rule" style="margin-bottom: 32px;">ご 予 約</div>
+  <h2>Every season, a new <span class="it">first meeting</span>.</h2>
+  <p>We would be honoured to welcome you to the counter.</p>
+  <a href="https://lounge.oddle.me/en_SG/mizuomakase" class="btn btn-solid"><span>Reserve a Seat</span><span class="arrow">→</span></a>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="mark-kanji">水</div>
+      <div class="mark-wd">Mizu Omakase</div>
+      <p>Where tradition meets the fluid art of sushi.</p>
+    </div>
+    <div class="foot-col">
+      <h5>Visit</h5><p>Jaya One</p><p>Petaling Jaya, Malaysia</p>
+      <p style="margin-top: 14px;">Tue – Sun</p><p>6:00 PM · 8:30 PM</p>
+    </div>
+    <div class="foot-col">
+      <h5>Menu</h5>
+      <a href="about.html">About Us</a><a href="menu.html">The Menu</a>
+      <a href="contact.html">Contact</a><a href="https://lounge.oddle.me/en_SG/mizuomakase">Reservations</a>
+    </div>
+    <div class="foot-col">
+      <h5>Follow</h5>
+      <a href="https://www.instagram.com/mizu.omakase/">Instagram</a>
+      <a href="https://www.facebook.com/profile.php?id=61584736661621">Facebook</a>
+    </div>
+  </div>
+  <div class="foot-bottom"><span>© 2026 Mizu Omakase Sdn. Bhd.</span><span>202501046693 (1648101-W)</span></div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+</script>
+</body>
+</html>

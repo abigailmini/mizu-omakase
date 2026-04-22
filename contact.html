@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact · Mizu Omakase</title>
+<link rel="stylesheet" href="shared.css" />
+<style>
+.contact-hero { padding: 200px var(--pad) 80px; text-align: center; position: relative; }
+.contact-hero::before {
+  content: 'お 問 合 せ';
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-family: var(--jp); font-size: 260px; color: var(--ember);
+  opacity: 0.04; letter-spacing: 0.15em; white-space: nowrap;
+}
+.contact-hero .kicker { font-family: var(--jp); font-size: 22px; color: var(--ember); letter-spacing: 0.3em; margin-bottom: 32px; position: relative; }
+.contact-hero h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(52px, 7vw, 120px); line-height: 0.98; color: var(--rice); letter-spacing: -0.02em; position: relative; }
+.contact-hero h1 .it { font-style: italic; color: var(--ember); }
+.contact-hero p { font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--bone); max-width: 50ch; margin: 32px auto 0; position: relative; }
+
+.contact-main { padding: 80px var(--pad) 120px; max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+.contact-form { border: 1px solid var(--hair); padding: 56px 48px; background: var(--ink-2); }
+.contact-form h3 { font-family: var(--serif); font-weight: 300; font-size: 36px; color: var(--rice); margin-bottom: 8px; letter-spacing: -0.01em; }
+.contact-form h3 .it { font-style: italic; color: var(--ember); }
+.contact-form > p.note { font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--bone-dim); margin-bottom: 40px; }
+.field { margin-bottom: 24px; }
+.field label { display: block; font-family: var(--sans); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--bone-dim); margin-bottom: 10px; }
+.field input, .field select, .field textarea {
+  width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--hair-strong);
+  color: var(--rice); font-family: var(--serif); font-size: 18px; padding: 10px 0 14px; outline: none; transition: border-color 320ms;
+}
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--ember); }
+.field textarea { resize: vertical; min-height: 80px; font-style: italic; }
+.field select option { background: var(--ink); }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.info-block { padding-top: 8px; }
+.info-block .eyebrow { margin-bottom: 36px; }
+.info-item { padding: 28px 0; border-bottom: 1px solid var(--hair); display: grid; grid-template-columns: 180px 1fr; gap: 24px; align-items: baseline; }
+.info-item:first-of-type { border-top: 1px solid var(--hair); }
+.info-item h5 { font-family: var(--sans); font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--ember); }
+.info-item .val { font-family: var(--serif); font-size: 19px; color: var(--rice); line-height: 1.5; }
+.info-item .val .tiny { display: block; font-family: var(--serif); font-style: italic; font-size: 15px; color: var(--bone-dim); margin-top: 4px; }
+.info-item .val a { color: var(--ember); transition: color 200ms; }
+.info-item .val a:hover { color: var(--rice); }
+
+.map-image { margin-top: 40px; aspect-ratio: 16/10; background: var(--ink-2); border: 1px solid var(--hair); position: relative; overflow: hidden; }
+.map-image::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(201,161,107,0.22) 0%, transparent 25%),
+    linear-gradient(115deg, transparent 48%, var(--ember) 49%, var(--ember) 50%, transparent 51%),
+    linear-gradient(35deg, transparent 38%, rgba(201,161,107,0.35) 39%, rgba(201,161,107,0.35) 40%, transparent 41%),
+    linear-gradient(75deg, transparent 62%, rgba(201,161,107,0.2) 63%, rgba(201,161,107,0.2) 64%, transparent 65%),
+    var(--ink-2);
+}
+.map-image::after {
+  content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 16px; height: 16px; border-radius: 50%; background: var(--ember);
+  box-shadow: 0 0 0 6px rgba(201,161,107,0.2), 0 0 0 14px rgba(201,161,107,0.08);
+  animation: pulse 2.4s cubic-bezier(.4,0,.2,1) infinite;
+}
+@keyframes pulse { 50% { box-shadow: 0 0 0 10px rgba(201,161,107,0.3), 0 0 0 24px rgba(201,161,107,0); } }
+.map-label { position: absolute; top: 20px; left: 20px; font-family: var(--sans); font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--bone); z-index: 2; }
+.map-label strong { display: block; font-family: var(--serif); font-size: 20px; letter-spacing: 0.02em; color: var(--rice); margin-top: 8px; text-transform: none; font-weight: 400; }
+
+.visit-strip { padding: 100px var(--pad); background: var(--ink-2); border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair); }
+.visit-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+.visit-item .jp { font-family: var(--jp); font-size: 36px; color: var(--ember); margin-bottom: 16px; line-height: 1; }
+.visit-item h5 { font-family: var(--sans); font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--ember); margin-bottom: 12px; }
+.visit-item p { font-family: var(--serif); font-size: 17px; color: var(--bone); line-height: 1.65; }
+
+@media (max-width: 900px) {
+  .contact-main, .visit-inner { grid-template-columns: 1fr; gap: 40px; }
+  .info-item { grid-template-columns: 1fr; gap: 8px; }
+  .field-row { grid-template-columns: 1fr; }
+  .contact-form { padding: 40px 28px; }
+}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<nav class="nav" id="nav">
+  <div class="nav-left">
+    <a href="home.html" class="navlink">Home</a>
+    <a href="about.html" class="navlink">About</a>
+    <a href="menu.html" class="navlink">Menu</a>
+    <a href="contact.html" class="navlink active">Contact</a>
+  </div>
+  <a href="home.html" class="brand-mark"><span class="mark-kanji">水</span><span class="mark-wd">Mizu</span></a>
+  <div class="nav-right">
+    <a href="#" class="navlink">EN / 日本語</a>
+    <a href="https://lounge.oddle.me/en_SG/mizuomakase" class="navlink nav-reserve" style="color: var(--ember); border: 1px solid var(--ember); padding: 10px 18px;">Reserve</a>
+  </div>
+</nav>
+
+<div class="reserve-dock">
+  <div class="dock-label">Counter Seating<strong>Reserve Tonight</strong></div>
+  <a href="https://lounge.oddle.me/en_SG/mizuomakase" class="dock-cta">Book a Seat <span>→</span></a>
+</div>
+
+<section class="contact-hero">
+  <div class="kicker">お 問 合 せ · Contact</div>
+  <h1>We would be honoured<br/>to <span class="it">welcome</span> you.</h1>
+  <p>For private events, press enquiries, or questions about the evening — please write to us directly.</p>
+</section>
+
+<section class="contact-main">
+  <div class="contact-form">
+    <h3>A <span class="it">note</span> to the counter.</h3>
+    <p class="note">For reservations, please use our booking platform — it reflects live availability.</p>
+
+    <div class="field-row">
+      <div class="field"><label>Name</label><input type="text" placeholder="Your name" /></div>
+      <div class="field"><label>Email</label><input type="email" placeholder="you@example.com" /></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field"><label>Phone</label><input type="tel" placeholder="+60 12 345 6789" /></div>
+      <div class="field">
+        <label>Enquiry</label>
+        <select>
+          <option>General enquiry</option>
+          <option>Private dining / buyout</option>
+          <option>Press &amp; media</option>
+          <option>Dietary arrangement</option>
+          <option>Gift vouchers</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Message</label>
+      <textarea rows="4" placeholder="Tell us about the occasion, the date you have in mind, the guests in your party..."></textarea>
+    </div>
+
+    <button class="btn btn-solid" style="width: 100%; justify-content: center; margin-top: 20px;">
+      <span>Send Message</span><span class="arrow">→</span>
+    </button>
+  </div>
+
+  <div class="info-block">
+    <div class="eyebrow">Visit · 来 店</div>
+
+    <div class="info-item">
+      <h5>Address</h5>
+      <div class="val">Mizu Omakase<br/>Jaya One, Petaling Jaya<span class="tiny">Selangor, Malaysia · 46200</span></div>
+    </div>
+    <div class="info-item">
+      <h5>Hours</h5>
+      <div class="val">Tuesday – Sunday<span class="tiny">Two seatings · 6:00 PM &amp; 8:30 PM</span><span class="tiny">Closed Mondays</span></div>
+    </div>
+    <div class="info-item">
+      <h5>Reservations</h5>
+      <div class="val"><a href="https://lounge.oddle.me/en_SG/mizuomakase">lounge.oddle.me / mizuomakase</a><span class="tiny">Released on the 1st of each month, for the following month</span></div>
+    </div>
+    <div class="info-item">
+      <h5>Direct</h5>
+      <div class="val"><a href="mailto:counter@mizuomakase.com">counter@mizuomakase.com</a><span class="tiny">+60 3 7932 2626</span></div>
+    </div>
+    <div class="info-item">
+      <h5>Follow</h5>
+      <div class="val"><a href="https://www.instagram.com/mizu.omakase/">Instagram</a> · <a href="https://www.facebook.com/profile.php?id=61584736661621">Facebook</a></div>
+    </div>
+
+    <div class="map-image"><div class="map-label">Jaya One<strong>Petaling Jaya</strong></div></div>
+  </div>
+</section>
+
+<section class="visit-strip">
+  <div class="visit-inner">
+    <div class="visit-item"><div class="jp">席</div><h5>Seating</h5><p>Twelve counter seats only. We do not accept walk-ins.</p></div>
+    <div class="visit-item"><div class="jp">時</div><h5>Arrival</h5><p>Please arrive fifteen minutes before your seating. Late guests may miss the opening course.</p></div>
+    <div class="visit-item"><div class="jp">礼</div><h5>Dress</h5><p>Smart casual. Closed shoes. We ask guests to avoid strong fragrance for the benefit of the table.</p></div>
+    <div class="visit-item"><div class="jp">写</div><h5>Photography</h5><p>A discreet photograph of your course is welcome. We ask that flash and video remain outside the counter.</p></div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand"><div class="mark-kanji">水</div><div class="mark-wd">Mizu Omakase</div><p>Where tradition meets the fluid art of sushi.</p></div>
+    <div class="foot-col"><h5>Visit</h5><p>Jaya One</p><p>Petaling Jaya, Malaysia</p><p style="margin-top: 14px;">Tue – Sun</p><p>6:00 PM · 8:30 PM</p></div>
+    <div class="foot-col"><h5>Menu</h5><a href="about.html">About Us</a><a href="menu.html">The Menu</a><a href="contact.html">Contact</a><a href="https://lounge.oddle.me/en_SG/mizuomakase">Reservations</a></div>
+    <div class="foot-col"><h5>Follow</h5><a href="https://www.instagram.com/mizu.omakase/">Instagram</a><a href="https://www.facebook.com/profile.php?id=61584736661621">Facebook</a></div>
+  </div>
+  <div class="foot-bottom"><span>© 2026 Mizu Omakase Sdn. Bhd.</span><span>202501046693 (1648101-W)</span></div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+</script>
+</body>
+</html>

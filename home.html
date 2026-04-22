@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mizu Omakase — Where tradition meets the fluid art of sushi</title>
+<link rel="stylesheet" href="shared.css" />
+<style>
+/* ================= HOME A — Ink & Ember ================= */
+
+/* HERO with cross-fade + slow zoom */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 720px;
+  overflow: hidden;
+  background: var(--ink);
+}
+.hero-frames {
+  position: absolute; inset: 0;
+}
+.hero-frame {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity 1800ms cubic-bezier(.4,0,.2,1);
+}
+.hero-frame.on { opacity: 1; }
+.hero-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  animation: slowZoom 14s linear infinite alternate;
+  transform-origin: center;
+}
+@keyframes slowZoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.12); }
+}
+.hero-frames::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 70%, rgba(0,0,0,0) 0%, rgba(10,9,8,0.55) 60%, rgba(10,9,8,0.9) 100%),
+    linear-gradient(180deg, rgba(10,9,8,0.55) 0%, rgba(10,9,8,0) 20%, rgba(10,9,8,0) 60%, rgba(10,9,8,0.65) 100%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: absolute; inset: 0;
+  display: grid;
+  grid-template-rows: 1fr auto 1fr;
+  padding: 120px var(--pad) 48px;
+  z-index: 2;
+}
+.hero-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.hero-top .locale {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  display: flex; align-items: center; gap: 14px;
+}
+.hero-top .locale::before {
+  content: ''; width: 28px; height: 1px; background: var(--ember);
+}
+
+.hero-center {
+  align-self: end;
+  padding-bottom: 40px;
+  position: relative;
+}
+.hero-title {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(48px, 9vw, 148px);
+  line-height: 0.92;
+  color: var(--rice);
+  letter-spacing: -0.02em;
+  max-width: 18ch;
+}
+.hero-title .it { font-style: italic; color: var(--ember); font-weight: 300; }
+.hero-sub {
+  margin-top: 36px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(17px, 1.3vw, 20px);
+  color: var(--bone);
+  max-width: 50ch;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+.hero-bottom {
+  align-self: end;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+}
+.hero-ctas { display: flex; gap: 16px; align-items: center; }
+.hero-indicator {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.hero-indicator .tick {
+  width: 1px; height: 64px;
+  background: linear-gradient(to bottom, var(--ember) 0%, transparent 100%);
+  position: relative;
+  overflow: hidden;
+}
+.hero-indicator .tick::after {
+  content: '';
+  position: absolute; top: -30%; left: 0; width: 100%; height: 30%;
+  background: var(--rice);
+  animation: dripDown 2400ms cubic-bezier(.4,0,.2,1) infinite;
+}
+@keyframes dripDown {
+  0% { top: -30%; }
+  100% { top: 120%; }
+}
+
+.hero-frame-counter {
+  position: absolute;
+  right: var(--pad);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  color: var(--bone-dim);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+  z-index: 3;
+}
+.hero-frame-counter .dots {
+  display: flex; flex-direction: column; gap: 6px;
+  align-items: center;
+}
+.hero-frame-counter .dot {
+  width: 2px; height: 14px;
+  background: var(--hair-strong);
+  cursor: pointer;
+  transition: all 400ms;
+}
+.hero-frame-counter .dot.on { background: var(--ember); height: 28px; }
+
+/* ============ PHILOSOPHY ============ */
+.philosophy {
+  padding: clamp(100px, 14vw, 180px) var(--pad);
+  position: relative;
+}
+.phil-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(60px, 8vw, 140px);
+  align-items: center;
+}
+.phil-eyebrow {
+  display: flex; align-items: center; gap: 18px;
+  margin-bottom: 32px;
+}
+.phil-eyebrow .jp { font-family: var(--jp); font-size: 22px; color: var(--ember); }
+.phil-title {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(36px, 4.5vw, 72px);
+  line-height: 1.05;
+  color: var(--rice);
+  letter-spacing: -0.015em;
+  margin-bottom: 32px;
+}
+.phil-title .it { font-style: italic; color: var(--ember); }
+.phil-body {
+  font-family: var(--serif);
+  font-size: clamp(17px, 1.25vw, 20px);
+  line-height: 1.75;
+  color: var(--bone);
+  max-width: 48ch;
+}
+.phil-body + .phil-body { margin-top: 20px; }
+
+.phil-img-col {
+  position: relative;
+  aspect-ratio: 4/5;
+}
+.phil-img-col img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.95) contrast(1.05);
+}
+.phil-img-col::before {
+  content: '水';
+  position: absolute;
+  right: -60px; top: -40px;
+  font-family: var(--jp);
+  font-size: 220px;
+  color: var(--ember);
+  opacity: 0.08;
+  line-height: 1;
+  z-index: -1;
+}
+.phil-img-col .img-caption {
+  position: absolute;
+  left: 24px; bottom: 24px;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--rice);
+  background: rgba(10,9,8,0.65);
+  backdrop-filter: blur(6px);
+  padding: 10px 14px;
+  border: 1px solid var(--hair);
+}
+
+/* ============ STATS / SEATS ============ */
+.seats {
+  padding: 120px var(--pad);
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(201,161,107,0.08) 0%, rgba(10,9,8,0) 60%),
+    var(--ink-2);
+  border-top: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+  text-align: center;
+}
+.seats-inner { max-width: 1100px; margin: 0 auto; }
+.seats-kanji {
+  font-family: var(--jp);
+  font-size: 32px;
+  color: var(--ember);
+  letter-spacing: 0.4em;
+  margin-bottom: 20px;
+}
+.seats-head {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(28px, 3.4vw, 48px);
+  font-weight: 300;
+  color: var(--rice);
+  line-height: 1.3;
+  max-width: 22ch;
+  margin: 0 auto 64px;
+}
+.stats-row {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr 1px 1fr;
+  gap: 0;
+  align-items: center;
+}
+.stat-item .num {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(64px, 8vw, 120px);
+  line-height: 1;
+  color: var(--ember);
+  letter-spacing: -0.02em;
+  font-feature-settings: "lnum" 1;
+}
+.stat-item .num sup {
+  font-size: 0.4em;
+  margin-left: 0.15em;
+  vertical-align: super;
+  color: var(--ember-deep);
+}
+.stat-item .lbl {
+  margin-top: 12px;
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+.stats-row .divider { width: 1px; height: 80px; background: var(--hair-strong); }
+
+/* ============ COURSE GALLERY ============ */
+.experience {
+  padding: clamp(100px, 14vw, 180px) var(--pad);
+  position: relative;
+}
+.exp-head {
+  max-width: 1400px;
+  margin: 0 auto 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+}
+.exp-head h2 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(38px, 5vw, 80px);
+  line-height: 1.02;
+  color: var(--rice);
+  letter-spacing: -0.015em;
+}
+.exp-head h2 .it { font-style: italic; color: var(--ember); }
+.exp-head p {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--bone);
+  line-height: 1.7;
+  max-width: 44ch;
+}
+
+.course-rail {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.course-card {
+  position: relative;
+  cursor: pointer;
+}
+.course-card .course-num {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ember);
+  letter-spacing: 0.1em;
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.course-card .course-num::after {
+  content: ''; flex: 1; height: 1px; background: var(--hair);
+}
+.course-card .course-img {
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  margin-bottom: 20px;
+  position: relative;
+}
+.course-card .course-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 1200ms cubic-bezier(.2,.7,.2,1), filter 800ms;
+  filter: brightness(0.95);
+}
+.course-card:hover .course-img img {
+  transform: scale(1.06);
+  filter: brightness(1.05);
+}
+.course-card .course-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--rice);
+  letter-spacing: 0.01em;
+  margin-bottom: 6px;
+}
+.course-card .course-title .jp-inline {
+  font-family: var(--jp);
+  color: var(--ember);
+  font-size: 14px;
+  margin-left: 10px;
+}
+.course-card .course-note {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--bone-dim);
+  line-height: 1.5;
+}
+
+/* ============ SPACE SECTION — full bleed ============ */
+.space {
+  position: relative;
+  min-height: 90vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 0;
+  overflow: hidden;
+}
+.space-bg {
+  position: absolute; inset: 0;
+  z-index: 0;
+}
+.space-bg img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.6);
+}
+.space-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10,9,8,0.5) 0%, rgba(10,9,8,0.1) 30%, rgba(10,9,8,0.1) 70%, rgba(10,9,8,0.9) 100%);
+}
+.space-inner {
+  position: relative; z-index: 2;
+  padding: 140px var(--pad) 120px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  min-height: 90vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+.space-title {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(42px, 5.5vw, 92px);
+  line-height: 1.02;
+  color: var(--rice);
+  letter-spacing: -0.015em;
+}
+.space-title .it { font-style: italic; color: var(--ember); }
+.space-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.space-detail p {
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.7;
+  color: var(--bone);
+}
+.space-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.space-chip {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--rice);
+  border: 1px solid var(--hair-strong);
+  padding: 8px 14px;
+  background: rgba(10,9,8,0.4);
+  backdrop-filter: blur(6px);
+}
+
+/* ============ CHEF ============ */
+.chef {
+  padding: clamp(100px, 14vw, 180px) var(--pad);
+  background: var(--ink-2);
+  border-bottom: 1px solid var(--hair);
+  position: relative;
+}
+.chef-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 100px;
+  align-items: center;
+}
+.chef-img {
+  aspect-ratio: 4/5;
+  position: relative;
+  overflow: hidden;
+}
+.chef-img img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.92) contrast(1.1); }
+.chef-img::after {
+  content: '';
+  position: absolute; inset: 0;
+  box-shadow: inset 0 0 120px rgba(10,9,8,0.7);
+}
+.chef-sig {
+  position: absolute;
+  right: -30px; bottom: 40px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 72px;
+  color: var(--ember);
+  writing-mode: vertical-rl;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  opacity: 0.9;
+}
+.chef-body .eyebrow { margin-bottom: 24px; }
+.chef-body h3 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(36px, 4.4vw, 72px);
+  line-height: 1.05;
+  color: var(--rice);
+  margin-bottom: 12px;
+  letter-spacing: -0.015em;
+}
+.chef-body h3 .it { font-style: italic; color: var(--ember); }
+.chef-role {
+  font-family: var(--jp);
+  font-size: 16px;
+  color: var(--ember);
+  letter-spacing: 0.12em;
+  margin-bottom: 32px;
+}
+.chef-body p {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--bone);
+  max-width: 52ch;
+}
+.chef-body p + p { margin-top: 18px; }
+.chef-quote {
+  margin-top: 40px;
+  padding-left: 24px;
+  border-left: 1px solid var(--ember);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--rice);
+  max-width: 40ch;
+}
+
+/* ============ SEASON ============ */
+.season {
+  padding: clamp(100px, 14vw, 180px) var(--pad);
+  position: relative;
+}
+.season-head {
+  max-width: 1400px;
+  margin: 0 auto 80px;
+  text-align: center;
+}
+.season-head .eyebrow { margin-bottom: 24px; }
+.season-head h2 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(38px, 5vw, 80px);
+  line-height: 1.02;
+  color: var(--rice);
+  letter-spacing: -0.015em;
+  max-width: 20ch;
+  margin: 0 auto;
+}
+.season-head h2 .it { font-style: italic; color: var(--ember); }
+.season-head .sub {
+  margin-top: 20px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--bone-dim);
+}
+.season-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+.season-card {
+  border: 1px solid var(--hair);
+  padding: 40px 32px;
+  background: var(--ink-2);
+  position: relative;
+  transition: border-color 500ms, transform 500ms;
+}
+.season-card:hover {
+  border-color: var(--ember);
+  transform: translateY(-4px);
+}
+.season-card .jp {
+  font-family: var(--jp);
+  font-size: 44px;
+  color: var(--ember);
+  line-height: 1;
+  margin-bottom: 20px;
+}
+.season-card .month {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  margin-bottom: 18px;
+}
+.season-card h4 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--rice);
+  margin-bottom: 16px;
+}
+.season-card ul {
+  list-style: none;
+  padding: 0;
+}
+.season-card li {
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--bone);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--hair);
+  display: flex; justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+.season-card li:last-child { border-bottom: none; }
+.season-card li .origin {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ember);
+}
+
+/* ============ PRESS ============ */
+.press {
+  padding: 100px var(--pad);
+  border-top: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+  background: var(--ink-2);
+}
+.press-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.press-head {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--ember);
+  max-width: 12ch;
+  line-height: 1.6;
+}
+.press-logos {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 48px;
+  align-items: center;
+}
+.press-logo {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--bone-dim);
+  text-align: center;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+  transition: opacity 300ms, color 300ms;
+}
+.press-logo:hover { opacity: 1; color: var(--rice); }
+.press-logo.upper {
+  font-style: normal;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+.press-logo .star {
+  display: inline-block;
+  color: var(--ember);
+  margin-right: 4px;
+}
+
+/* ============ FAQ ============ */
+.faq {
+  padding: clamp(100px, 14vw, 180px) var(--pad);
+}
+.faq-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 100px;
+}
+.faq-side .eyebrow { margin-bottom: 24px; }
+.faq-side h3 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(36px, 4.2vw, 64px);
+  line-height: 1.05;
+  color: var(--rice);
+  letter-spacing: -0.015em;
+  margin-bottom: 24px;
+}
+.faq-side h3 .it { font-style: italic; color: var(--ember); }
+.faq-side p {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--bone-dim);
+  max-width: 28ch;
+}
+.faq-item {
+  border-top: 1px solid var(--hair);
+  padding: 24px 0;
+  cursor: pointer;
+}
+.faq-item:last-child { border-bottom: 1px solid var(--hair); }
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+.faq-q h4 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--rice);
+  letter-spacing: -0.005em;
+}
+.faq-q .plus {
+  font-family: var(--jp);
+  font-size: 24px;
+  color: var(--ember);
+  transition: transform 400ms;
+  line-height: 1;
+}
+.faq-item.open .faq-q .plus { transform: rotate(45deg); }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 520ms cubic-bezier(.4,0,.2,1), margin 520ms;
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--bone);
+}
+.faq-item.open .faq-a {
+  max-height: 200px;
+  margin-top: 18px;
+}
+
+/* ============ RESERVE CTA ============ */
+.reserve-hero {
+  padding: clamp(100px, 14vw, 180px) var(--pad);
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(201,161,107,0.12) 0%, rgba(10,9,8,0) 60%),
+    var(--ink);
+  text-align: center;
+}
+.reserve-hero::before {
+  content: '水';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -48%);
+  font-family: var(--jp);
+  font-size: 640px;
+  color: var(--ember);
+  opacity: 0.04;
+  line-height: 0.8;
+  pointer-events: none;
+  font-weight: 300;
+}
+.reserve-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+.reserve-kanji {
+  font-family: var(--jp);
+  font-size: 26px;
+  color: var(--ember);
+  letter-spacing: 0.4em;
+  margin-bottom: 32px;
+}
+.reserve-title {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(40px, 5.5vw, 92px);
+  line-height: 1.02;
+  color: var(--rice);
+  letter-spacing: -0.015em;
+  margin-bottom: 32px;
+}
+.reserve-title .it { font-style: italic; color: var(--ember); }
+.reserve-body {
+  font-family: var(--serif);
+  font-size: clamp(17px, 1.3vw, 21px);
+  line-height: 1.7;
+  color: var(--bone);
+  max-width: 58ch;
+  margin: 0 auto 48px;
+}
+.reserve-details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin: 64px 0 48px;
+  border-top: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+}
+.reserve-details > div {
+  padding: 28px 16px;
+  border-right: 1px solid var(--hair);
+  text-align: center;
+}
+.reserve-details > div:last-child { border-right: none; }
+.reserve-details h5 {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 12px;
+}
+.reserve-details p {
+  font-family: var(--serif);
+  font-size: 19px;
+  color: var(--rice);
+  letter-spacing: 0.01em;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 900px) {
+  .hero-title { font-size: 52px; }
+  .hero-frame-counter { display: none; }
+  .phil-grid, .exp-head, .space-inner, .chef-grid, .faq-grid, .press-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .course-rail, .season-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .press-logos { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .stats-row { grid-template-columns: 1fr; gap: 40px; }
+  .stats-row .divider { display: none; }
+  .reserve-details { grid-template-columns: 1fr; }
+  .reserve-details > div { border-right: none; border-bottom: 1px solid var(--hair); }
+}
+</style>
+</head>
+<body>
+
+<!-- grain overlay -->
+<div class="grain"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-left">
+    <a href="home.html" class="navlink active">Home</a>
+    <a href="about.html" class="navlink">About</a>
+    <a href="menu.html" class="navlink">Menu</a>
+    <a href="contact.html" class="navlink">Contact</a>
+  </div>
+  <a href="home.html" class="brand-mark" aria-label="Mizu Omakase">
+    <span class="mark-kanji">水</span>
+    <span class="mark-wd">Mizu</span>
+  </a>
+  <div class="nav-right">
+    <a href="#" class="navlink">EN / 日本語</a>
+    <a href="https://lounge.oddle.me/en_SG/mizuomakase" class="navlink nav-reserve" style="color: var(--ember); border: 1px solid var(--ember); padding: 10px 18px;">Reserve</a>
+  </div>
+</nav>
+
+<!-- STICKY RESERVE DOCK -->
+<div class="reserve-dock">
+  <div class="dock-label">
+    Counter Seating
+    <strong>Reserve Tonight</strong>
+  </div>
+  <a href="https://lounge.oddle.me/en_SG/mizuomakase" class="dock-cta">
+    Book a Seat <span>→</span>
+  </a>
+</div>
+
+<!-- HERO — cross-fade -->
+<section class="hero">
+  <div class="hero-frames" id="heroFrames">
+    <div class="hero-frame on"><img src="images/hero-counter.jpg" alt="Counter" /></div>
+    <div class="hero-frame"><img src="images/dish-80.jpg" alt="Counter detail" /></div>
+    <div class="hero-frame"><img src="images/dish-23.jpg" alt="Tuna with caviar" /></div>
+    <div class="hero-frame"><img src="images/dish-54.jpg" alt="Flame-kissed nigiri" /></div>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-top">
+      <div class="locale">Jaya One · Petaling Jaya</div>
+      <div class="locale" style="text-align:right;">Est. 2026 · Counter of Twelve</div>
+    </div>
+
+    <div class="hero-center">
+      <h1 class="hero-title">
+        Where tradition<br/>
+        meets the <span class="it">fluid</span><br/>
+        art of sushi.
+      </h1>
+      <p class="hero-sub">
+        A twelve-seat counter in Jaya One, where Chef Howl guides a seasonal omakase journey — crafted with care, balance, and unwavering intention.
+      </p>
+    </div>
+
+    <div class="hero-bottom">
+      <div class="hero-ctas">
+        <a href="https://lounge.oddle.me/en_SG/mizuomakase" class="btn btn-solid"><span>Reserve a Seat</span><span class="arrow">→</span></a>
+        <a href="about.html" class="btn"><span>Our Philosophy</span></a>
+      </div>
+      <div class="hero-indicator">
+        <span>Scroll</span>
+        <span class="tick"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-frame-counter">
+    <span>01 / 04</span>
+    <div class="dots">
+      <span class="dot on" data-i="0"></span>
+      <span class="dot" data-i="1"></span>
+      <span class="dot" data-i="2"></span>
+      <span class="dot" data-i="3"></span>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy">
+  <div class="phil-grid">
+    <div class="phil-img-col reveal">
+      <img src="images/dish-17.jpg" alt="Seasonal selection" />
+      <span class="img-caption">Chef Howl · Morning selection</span>
+    </div>
+    <div>
+      <div class="phil-eyebrow reveal">
+        <span class="eyebrow">Our Philosophy</span>
+        <span class="jp">お任せ</span>
+      </div>
+      <h2 class="phil-title reveal delay-1">
+        <span class="it">Omakase</span> —<br/>
+        "I leave it up to you."
+      </h2>
+      <p class="phil-body reveal delay-2">
+        At Mizu Omakase, the multi-course menu is chosen entirely by Chef Howl, guided by the rhythm of the seasons and the finest ingredients sourced that morning. Served at our twelve-seat Japanese counter, each course unfolds with grace, precision, and an unwavering respect for tradition.
+      </p>
+      <p class="phil-body reveal delay-3">
+        You are not a diner here. You are a guest at the counter, watching the work unfold, hand by hand, course by course.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="seats">
+  <div class="seats-inner">
+    <div class="seats-kanji reveal">一 期 一 会</div>
+    <p class="seats-head reveal delay-1">
+      <span style="font-style: normal; color: var(--bone-dim); font-size: 0.5em; display: block; letter-spacing: 0.3em; margin-bottom: 18px;">ICHI-GO ICHI-E</span>
+      One moment. One meeting. One meal — never to be repeated.
+    </p>
+
+    <div class="stats-row">
+      <div class="stat-item reveal delay-1">
+        <div class="num">12</div>
+        <div class="lbl">Seats, Counter Only</div>
+      </div>
+      <div class="divider"></div>
+      <div class="stat-item reveal delay-2">
+        <div class="num">16<sup>+</sup></div>
+        <div class="lbl">Curated Courses</div>
+      </div>
+      <div class="divider"></div>
+      <div class="stat-item reveal delay-3">
+        <div class="num">02</div>
+        <div class="lbl">Seatings · 6PM &amp; 8:30PM</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE / COURSE PREVIEW -->
+<section class="experience">
+  <div class="exp-head">
+    <div class="reveal">
+      <div class="eyebrow" style="margin-bottom: 24px;">The Experience · 品 々</div>
+      <h2>A journey of<br/><span class="it">sixteen</span> movements.</h2>
+    </div>
+    <p class="reveal delay-1">
+      The menu changes nightly — what follows is a glimpse of the atmosphere, not a spoiler. The cadence, the textures, the rhythm of fire and ice. Your meal will be written on the evening of your visit.
+    </p>
+  </div>
+
+  <div class="course-rail">
+    <div class="course-card reveal">
+      <div class="course-num">Movement I · Sakizuke</div>
+      <div class="course-img"><img src="images/dish-45.jpg" alt="Opening" /></div>
+      <div class="course-title">The Prologue <span class="jp-inline">先付</span></div>
+      <div class="course-note">A cool first greeting — smoke, citrus, the quiet opening of the evening.</div>
+    </div>
+    <div class="course-card reveal delay-1">
+      <div class="course-num">Movement V · Otsukuri</div>
+      <div class="course-img"><img src="images/dish-23.jpg" alt="Sashimi" /></div>
+      <div class="course-title">The Cut <span class="jp-inline">お造り</span></div>
+      <div class="course-note">Knife, blade, intention — translucent slices dusted in gold leaf.</div>
+    </div>
+    <div class="course-card reveal delay-2">
+      <div class="course-num">Movement IX · Yakimono</div>
+      <div class="course-img"><img src="images/dish-54.jpg" alt="Flame" /></div>
+      <div class="course-title">The Flame <span class="jp-inline">焼物</span></div>
+      <div class="course-note">Binchōtan searing the skin, rice still whispering warmth beneath.</div>
+    </div>
+    <div class="course-card reveal delay-3">
+      <div class="course-num">Movement XIV · Mukōzuke</div>
+      <div class="course-img"><img src="images/dish-46.jpg" alt="Nest" /></div>
+      <div class="course-title">The Offering <span class="jp-inline">向付</span></div>
+      <div class="course-note">Earth and ember — a vessel that reveals itself only in the eating.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SPACE -->
+<section class="space">
+  <div class="space-bg"><img src="images/dish-80.jpg" alt="The counter" /></div>
+  <div class="space-inner">
+    <h2 class="space-title reveal">
+      Serene.<br/>
+      Refined.<br/>
+      <span class="it">Immersive.</span>
+    </h2>
+    <div class="space-detail reveal delay-1">
+      <span class="eyebrow">The Space · 店内</span>
+      <p>
+        Natural texture, warm lighting, and clean lines create an intimate counter setting where attention is drawn entirely to the chef's craftsmanship. Every surface, every shadow, every breath of the room has been considered.
+      </p>
+      <div class="space-chips">
+        <span class="space-chip">Curved Hinoki Counter</span>
+        <span class="space-chip">Washi Lantern Light</span>
+        <span class="space-chip">Kumiko Lattice</span>
+        <span class="space-chip">Kanji Signage</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHEF -->
+<section class="chef">
+  <div class="chef-grid">
+    <div class="chef-img reveal">
+      <img src="images/dish-17.jpg" alt="Chef Howl" />
+      <span class="chef-sig">Chef Howl</span>
+    </div>
+    <div class="chef-body">
+      <div class="eyebrow reveal">The Chef · 職 人</div>
+      <h3 class="reveal delay-1">
+        Chef <span class="it">Howl</span>.<br/>
+        A study in quiet mastery.
+      </h3>
+      <div class="chef-role reveal delay-1">大将 · Itamae</div>
+      <p class="reveal delay-2">
+        Chef Howl trained beneath traditional itamae in both Tokyo and Osaka before returning to Malaysia to pursue his own expression of Edomae. His hand is unhurried, his cuts deliberate, his seasoning almost imperceptibly exact — a practice refined across two decades at the counter.
+      </p>
+      <p class="reveal delay-3">
+        At Mizu, he sources from Toyosu auctions twice weekly, pairing Japanese catches with the best of the region's seasonal bounty. The result is omakase that belongs, unmistakably, to this place — and to this moment.
+      </p>
+      <p class="chef-quote reveal delay-4">
+        "Every guest receives the same season. Yet no two meals are ever the same."
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SEASON -->
+<section class="season">
+  <div class="season-head">
+    <div class="eyebrow reveal">In Season · 旬</div>
+    <h2 class="reveal delay-1">What the <span class="it">season</span> is bringing<br/>to the counter.</h2>
+    <p class="sub reveal delay-2">Currently on the evening menu · April 2026</p>
+  </div>
+  <div class="season-grid">
+    <div class="season-card reveal">
+      <div class="jp">海</div>
+      <div class="month">From the Sea</div>
+      <h4>Spring catch</h4>
+      <ul>
+        <li>Kinmedai <span class="origin">Chiba</span></li>
+        <li>Aori-ika <span class="origin">Kyūshū</span></li>
+        <li>Hon-maguro chutoro <span class="origin">Ōma</span></li>
+        <li>Uni, bafun <span class="origin">Hokkaidō</span></li>
+      </ul>
+    </div>
+    <div class="season-card reveal delay-1">
+      <div class="jp">山</div>
+      <div class="month">From the Mountain</div>
+      <h4>Earth & foraged</h4>
+      <ul>
+        <li>Sansai · mountain vegetables <span class="origin">Nagano</span></li>
+        <li>Kyō-takenoko, bamboo <span class="origin">Kyoto</span></li>
+        <li>Shiitake, aged <span class="origin">Ōita</span></li>
+        <li>Aosa nori, first cut <span class="origin">Mie</span></li>
+      </ul>
+    </div>
+    <div class="season-card reveal delay-2">
+      <div class="jp">花</div>
+      <div class="month">In Bloom</div>
+      <h4>Spring accents</h4>
+      <ul>
+        <li>Sakura blossom salt <span class="origin">In-house</span></li>
+        <li>Kinome leaf <span class="origin">Wakayama</span></li>
+        <li>Yuzu peel, dried <span class="origin">Kōchi</span></li>
+        <li>Myōga flower <span class="origin">Local</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PRESS -->
+<section class="press">
+  <div class="press-inner">
+    <div class="press-head">As featured in</div>
+    <div class="press-logos">
+      <div class="press-logo upper"><span class="star">★</span> Tatler</div>
+      <div class="press-logo">Robb Report</div>
+      <div class="press-logo upper">Time Out KL</div>
+      <div class="press-logo">The Edge</div>
+      <div class="press-logo upper">Tasting Kitchen</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="faq-grid">
+    <div class="faq-side">
+      <div class="eyebrow reveal">Before Your Visit · ご 案 内</div>
+      <h3 class="reveal delay-1">A few <span class="it">notes</span> for the evening.</h3>
+      <p class="reveal delay-2">Because the meal is crafted in real time at an intimate counter, we ask guests to plan ahead and arrive with an open appetite.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <div class="faq-q"><h4>What is the price of the omakase?</h4><span class="plus">＋</span></div>
+        <div class="faq-a">The evening menu is priced at RM 688++ per guest for the full seasonal omakase (16+ courses). Seasonal truffle, caviar, and wagyu additions are offered at the counter.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><h4>What is the dress code?</h4><span class="plus">＋</span></div>
+        <div class="faq-a">Smart casual, with a request for closed shoes. We kindly ask guests to avoid strong perfumes, as they interfere with the subtle seasonal aromas of the menu.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><h4>How long is the experience?</h4><span class="plus">＋</span></div>
+        <div class="faq-a">Approximately 2 to 2½ hours. Two seatings run nightly — 6:00 PM and 8:30 PM — Tuesday through Sunday.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><h4>Can you accommodate dietary restrictions?</h4><span class="plus">＋</span></div>
+        <div class="faq-a">Please let us know at least 48 hours before your reservation. We can accommodate most allergies and restrictions, though vegetarian and vegan omakase must be arranged in advance.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><h4>May I bring my own sake or wine?</h4><span class="plus">＋</span></div>
+        <div class="faq-a">Corkage is available at RM 150 per bottle, limited to two bottles per party. Our own list features 14 sakes and a carefully paired progression.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><h4>What is the cancellation policy?</h4><span class="plus">＋</span></div>
+        <div class="faq-a">We hold a credit card at booking. Cancellations within 48 hours incur the full omakase charge, as ingredients are sourced specifically for your seat.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVE CTA -->
+<section class="reserve-hero">
+  <div class="reserve-inner">
+    <div class="reserve-kanji reveal">ご 予 約</div>
+    <h2 class="reserve-title reveal delay-1">
+      An intimate journey<br/>
+      begins <span class="it">here</span>.
+    </h2>
+    <p class="reserve-body reveal delay-2">
+      At Mizu, only a limited number of seats are released each evening. We invite you to join us at the counter, where Chef Howl will guide you through a seasonal omakase crafted with care, balance, and intention — an experience designed to be savoured, one course at a time.
+    </p>
+
+    <div class="reserve-details reveal delay-3">
+      <div>
+        <h5>Location</h5>
+        <p>Jaya One · Petaling Jaya</p>
+      </div>
+      <div>
+        <h5>Seating</h5>
+        <p>12 Seats · Counter Only</p>
+      </div>
+      <div>
+        <h5>Experience</h5>
+        <p>Multi-Course Omakase</p>
+      </div>
+    </div>
+
+    <a href="https://lounge.oddle.me/en_SG/mizuomakase" class="btn btn-solid reveal delay-4" style="font-size: 12px; padding: 20px 40px;">
+      <span>Reserve Your Seat</span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="mark-kanji">水</div>
+      <div class="mark-wd">Mizu Omakase</div>
+      <p>Where tradition meets the fluid art of sushi.</p>
+    </div>
+    <div class="foot-col">
+      <h5>Visit</h5>
+      <p>Jaya One</p>
+      <p>Petaling Jaya, Malaysia</p>
+      <p style="margin-top: 14px;">Tue – Sun</p>
+      <p>6:00 PM · 8:30 PM</p>
+    </div>
+    <div class="foot-col">
+      <h5>Menu</h5>
+      <a href="about.html">About Us</a>
+      <a href="menu.html">The Menu</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://lounge.oddle.me/en_SG/mizuomakase">Reservations</a>
+    </div>
+    <div class="foot-col">
+      <h5>Follow</h5>
+      <a href="https://www.instagram.com/mizu.omakase/">Instagram</a>
+      <a href="https://www.facebook.com/profile.php?id=61584736661621">Facebook</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Mizu Omakase Sdn. Bhd.</span>
+    <span>202501046693 (1648101-W)</span>
+  </div>
+</footer>
+
+<script>
+// NAV scrolled state
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+// HERO cross-fade
+const frames = document.querySelectorAll('.hero-frame');
+const dots = document.querySelectorAll('.hero-frame-counter .dot');
+const counter = document.querySelector('.hero-frame-counter span');
+let fi = 0;
+function showFrame(i) {
+  frames.forEach((f, idx) => f.classList.toggle('on', idx === i));
+  dots.forEach((d, idx) => d.classList.toggle('on', idx === i));
+  if (counter) counter.textContent = String(i+1).padStart(2,'0') + ' / ' + String(frames.length).padStart(2,'0');
+  fi = i;
+}
+setInterval(() => showFrame((fi+1) % frames.length), 5500);
+dots.forEach((d, i) => d.addEventListener('click', () => showFrame(i)));
+
+// FAQ accordion
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const willOpen = !item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (willOpen) item.classList.add('open');
+  });
+});
+
+// Reveal on scroll
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.14 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

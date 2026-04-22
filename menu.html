@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Menu · Mizu Omakase</title>
+<link rel="stylesheet" href="shared.css" />
+<style>
+.menu-hero {
+  padding: 200px var(--pad) 100px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.menu-hero::before {
+  content: '献 立';
+  position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);
+  font-family: var(--jp);
+  font-size: 480px;
+  color: var(--ember);
+  opacity: 0.04;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+.menu-hero .kicker {
+  font-family: var(--jp);
+  font-size: 22px;
+  color: var(--ember);
+  letter-spacing: 0.3em;
+  margin-bottom: 32px;
+  position: relative;
+}
+.menu-hero h1 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(52px, 8vw, 140px);
+  line-height: 0.98;
+  color: var(--rice);
+  letter-spacing: -0.02em;
+  max-width: 18ch;
+  margin: 0 auto;
+  position: relative;
+}
+.menu-hero h1 .it { font-style: italic; color: var(--ember); }
+.menu-hero p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(18px, 1.4vw, 22px);
+  color: var(--bone);
+  max-width: 48ch;
+  margin: 32px auto 0;
+  line-height: 1.65;
+  position: relative;
+}
+
+.menu-intro {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px var(--pad);
+  text-align: center;
+  border-top: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+}
+.menu-intro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+}
+.menu-intro-grid > div h5 {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 14px;
+}
+.menu-intro-grid > div p {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--rice);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.courses {
+  padding: 120px var(--pad);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.courses-head {
+  text-align: center;
+  margin-bottom: 100px;
+}
+.courses-head h2 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(36px, 4.5vw, 68px);
+  color: var(--rice);
+  letter-spacing: -0.01em;
+  margin-top: 20px;
+}
+.courses-head h2 .it { font-style: italic; color: var(--ember); }
+
+.course-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 1.3fr 240px;
+  gap: 40px;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--hair);
+  align-items: center;
+}
+.course-row:first-child { border-top: 1px solid var(--hair-strong); }
+.course-num-big {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 48px;
+  color: var(--ember);
+  line-height: 1;
+}
+.course-meta .stage {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+  margin-bottom: 8px;
+}
+.course-meta h4 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 30px;
+  color: var(--rice);
+  letter-spacing: -0.005em;
+  margin-bottom: 4px;
+}
+.course-meta .jp {
+  font-family: var(--jp);
+  font-size: 16px;
+  color: var(--ember);
+  letter-spacing: 0.1em;
+}
+.course-desc {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--bone);
+  max-width: 42ch;
+}
+.course-img-sm {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.course-img-sm img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.95); transition: transform 800ms; }
+.course-row:hover .course-img-sm img { transform: scale(1.05); }
+
+.pairings {
+  padding: 120px var(--pad);
+  background: var(--ink-2);
+  border-top: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+}
+.pair-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.pair-head h2 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(36px, 4.5vw, 68px);
+  color: var(--rice);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 20px 0 28px;
+}
+.pair-head h2 .it { font-style: italic; color: var(--ember); }
+.pair-head p {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--bone);
+  max-width: 40ch;
+}
+.pair-list { border-top: 1px solid var(--hair); }
+.pair-row {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--hair);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: baseline;
+}
+.pair-row h5 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--rice);
+  margin-bottom: 4px;
+}
+.pair-row .desc {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--bone-dim);
+}
+.pair-row .price {
+  font-family: var(--serif);
+  font-size: 24px;
+  color: var(--ember);
+  font-weight: 300;
+  white-space: nowrap;
+}
+
+.supplements {
+  padding: 120px var(--pad);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.supp-head { text-align: center; margin-bottom: 64px; }
+.supp-head h2 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(32px, 4vw, 54px);
+  color: var(--rice);
+  margin-top: 20px;
+  letter-spacing: -0.005em;
+}
+.supp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 80px;
+}
+.supp-row {
+  padding: 22px 0;
+  border-bottom: 1px dashed var(--hair);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 20px;
+}
+.supp-row h6 {
+  font-family: var(--serif);
+  font-size: 19px;
+  color: var(--rice);
+  font-weight: 400;
+  margin-bottom: 2px;
+}
+.supp-row .tiny {
+  font-family: var(--sans);
+  font-size: 10px;
+  color: var(--bone-dim);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.supp-row .price {
+  font-family: var(--serif);
+  color: var(--ember);
+  font-size: 20px;
+}
+
+@media (max-width: 900px) {
+  .menu-intro-grid { grid-template-columns: 1fr; gap: 40px; }
+  .course-row { grid-template-columns: 1fr; gap: 20px; padding: 32px 0; }
+  .course-img-sm { aspect-ratio: 16/10; }
+  .pair-inner, .supp-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<nav class="nav" id="nav">
+  <div class="nav-left">
+    <a href="home.html" class="navlink">Home</a>
+    <a href="about.html" class="navlink">About</a>
+    <a href="menu.html" class="navlink active">Menu</a>
+    <a href="contact.html" class="navlink">Contact</a>
+  </div>
+  <a href="home.html" class="brand-mark"><span class="mark-kanji">水</span><span class="mark-wd">Mizu</span></a>
+  <div class="nav-right">
+    <a href="#" class="navlink">EN / 日本語</a>
+    <a href="https://lounge.oddle.me/en_SG/mizuomakase" class="navlink nav-reserve" style="color: var(--ember); border: 1px solid var(--ember); padding: 10px 18px;">Reserve</a>
+  </div>
+</nav>
+
+<div class="reserve-dock">
+  <div class="dock-label">Counter Seating<strong>Reserve Tonight</strong></div>
+  <a href="https://lounge.oddle.me/en_SG/mizuomakase" class="dock-cta">Book a Seat <span>→</span></a>
+</div>
+
+<section class="menu-hero">
+  <div class="kicker">お 任 せ · Omakase</div>
+  <h1>A menu written<br/><span class="it">this morning</span>.</h1>
+  <p>The evening's movements are drawn from what arrived at the counter today. What follows is the shape of an evening — the particulars, always, belong to Chef Howl.</p>
+</section>
+
+<section class="menu-intro">
+  <div class="menu-intro-grid">
+    <div>
+      <h5>The Experience</h5>
+      <p>Sixteen-plus courses</p>
+    </div>
+    <div>
+      <h5>Evening</h5>
+      <p>RM 688<span style="font-size: 0.7em; color: var(--bone-dim)">++</span> per guest</p>
+    </div>
+    <div>
+      <h5>Duration</h5>
+      <p>2 – 2½ hours</p>
+    </div>
+  </div>
+</section>
+
+<section class="courses">
+  <div class="courses-head">
+    <span class="eyebrow">The Evening's Movements · 本日の流れ</span>
+    <h2>The <span class="it">shape</span> of an evening.</h2>
+  </div>
+
+  <div class="course-row">
+    <div class="course-num-big">01</div>
+    <div class="course-meta">
+      <div class="stage">Prologue</div>
+      <h4>Sakizuke</h4>
+      <div class="jp">先 付</div>
+    </div>
+    <div class="course-desc">A cool greeting. Shirako-dashi set with kuzu, spring herbs, the first breath of the evening.</div>
+    <div class="course-img-sm"><img src="images/dish-45.jpg" alt=""></div>
+  </div>
+
+  <div class="course-row">
+    <div class="course-num-big">02</div>
+    <div class="course-meta">
+      <div class="stage">Soup</div>
+      <h4>Wan-mono</h4>
+      <div class="jp">椀 物</div>
+    </div>
+    <div class="course-desc">A clear dashi, twelve hours tended. Whatever the morning's harvest allows — bamboo, clam, or matsutake in its season.</div>
+    <div class="course-img-sm"><img src="images/dish-46.jpg" alt=""></div>
+  </div>
+
+  <div class="course-row">
+    <div class="course-num-big">05</div>
+    <div class="course-meta">
+      <div class="stage">Sashimi</div>
+      <h4>Otsukuri</h4>
+      <div class="jp">お 造 り</div>
+    </div>
+    <div class="course-desc">Three cuts, translucent. Wild sea bream, flounder aged two days, tuna the chef will name when he places it.</div>
+    <div class="course-img-sm"><img src="images/dish-23.jpg" alt=""></div>
+  </div>
+
+  <div class="course-row">
+    <div class="course-num-big">09</div>
+    <div class="course-meta">
+      <div class="stage">Grilled</div>
+      <h4>Yakimono</h4>
+      <div class="jp">焼 物</div>
+    </div>
+    <div class="course-desc">Binchōtan. A fish whose skin crackles, whose flesh remains whole, whose rice remembers the warmth beneath.</div>
+    <div class="course-img-sm"><img src="images/dish-54.jpg" alt=""></div>
+  </div>
+
+  <div class="course-row">
+    <div class="course-num-big">11</div>
+    <div class="course-meta">
+      <div class="stage">Nigiri Progression</div>
+      <h4>Edomae Sushi</h4>
+      <div class="jp">江戸前握り</div>
+    </div>
+    <div class="course-desc">Seven to nine pieces, each placed on the counter before you. Rice seasoned with aged red vinegar, built to the temperature of the chef's hand.</div>
+    <div class="course-img-sm"><img src="images/dish-9.jpg" alt=""></div>
+  </div>
+
+  <div class="course-row">
+    <div class="course-num-big">14</div>
+    <div class="course-meta">
+      <div class="stage">Final Savoury</div>
+      <h4>Shime</h4>
+      <div class="jp">〆</div>
+    </div>
+    <div class="course-desc">Hand-rolled temaki of toro and takuan, to close the savoury progression. A single, deliberate motion.</div>
+    <div class="course-img-sm"><img src="images/dish-17.jpg" alt=""></div>
+  </div>
+
+  <div class="course-row">
+    <div class="course-num-big">16</div>
+    <div class="course-meta">
+      <div class="stage">Dessert</div>
+      <h4>Mizumono</h4>
+      <div class="jp">水 物</div>
+    </div>
+    <div class="course-desc">Sakura-leaf ice cream, yuzu curd, a final note of the morning's cherry — the evening's signature, and its ending.</div>
+    <div class="course-img-sm"><img src="images/dish-80.jpg" alt=""></div>
+  </div>
+</section>
+
+<section class="pairings">
+  <div class="pair-inner">
+    <div class="pair-head">
+      <span class="eyebrow">Pairings · お 酒</span>
+      <h2>A curated progression of <span class="it">sake</span> &amp; tea.</h2>
+      <p>Our in-house list follows each course with the same intention as the menu itself. Choose a pairing, or let the sommelier guide you.</p>
+    </div>
+    <div class="pair-list">
+      <div class="pair-row">
+        <div>
+          <h5>Sake Omakase</h5>
+          <div class="desc">Seven pours, chosen by the sommelier to move with the courses.</div>
+        </div>
+        <div class="price">+ RM 388</div>
+      </div>
+      <div class="pair-row">
+        <div>
+          <h5>Premium Sake Flight</h5>
+          <div class="desc">Junmai daiginjō selections, small-batch producers.</div>
+        </div>
+        <div class="price">+ RM 588</div>
+      </div>
+      <div class="pair-row">
+        <div>
+          <h5>Champagne &amp; Sake</h5>
+          <div class="desc">An open aperitif in champagne, followed by four focused sake pours.</div>
+        </div>
+        <div class="price">+ RM 488</div>
+      </div>
+      <div class="pair-row">
+        <div>
+          <h5>Non-Alcoholic Pairing</h5>
+          <div class="desc">Seasonal teas, house-fermented kōji waters, yuzu tonics.</div>
+        </div>
+        <div class="price">+ RM 188</div>
+      </div>
+      <div class="pair-row">
+        <div>
+          <h5>Corkage</h5>
+          <div class="desc">Your own bottle, welcomed. Limit of two per party.</div>
+        </div>
+        <div class="price">RM 150 / btl</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="supplements">
+  <div class="supp-head">
+    <span class="eyebrow">At the Counter · 追 加</span>
+    <h2>Evening <span style="font-style: normal; color: var(--ember);">additions</span>.</h2>
+  </div>
+  <div class="supp-grid">
+    <div class="supp-row">
+      <div>
+        <h6>Ōma Ōtoro</h6>
+        <div class="tiny">Bluefin · Aomori</div>
+      </div>
+      <div class="price">+ RM 180</div>
+    </div>
+    <div class="supp-row">
+      <div>
+        <h6>Hokkaidō Uni Flight</h6>
+        <div class="tiny">Bafun &amp; Murasaki · Three origins</div>
+      </div>
+      <div class="price">+ RM 240</div>
+    </div>
+    <div class="supp-row">
+      <div>
+        <h6>A5 Wagyu Shabu</h6>
+        <div class="tiny">Kagoshima · Counter-seared</div>
+      </div>
+      <div class="price">+ RM 220</div>
+    </div>
+    <div class="supp-row">
+      <div>
+        <h6>Kaluga Caviar Supplement</h6>
+        <div class="tiny">10g · Paired with a nigiri of the evening</div>
+      </div>
+      <div class="price">+ RM 160</div>
+    </div>
+    <div class="supp-row">
+      <div>
+        <h6>Seasonal Truffle</h6>
+        <div class="tiny">Shaved over a selected course</div>
+      </div>
+      <div class="price">+ RM 140</div>
+    </div>
+    <div class="supp-row">
+      <div>
+        <h6>Ikura Don Finale</h6>
+        <div class="tiny">In place of the usual shime</div>
+      </div>
+      <div class="price">+ RM 120</div>
+    </div>
+  </div>
+  <p style="text-align: center; margin-top: 48px; font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--bone-dim);">
+    All prices subject to 6% SST &amp; 10% service. Menu changes nightly.
+  </p>
+</section>
+
+<section class="about-cta" style="padding: 120px var(--pad); text-align: center; max-width: 800px; margin: 0 auto;">
+  <div class="rule" style="margin-bottom: 32px;">ご 予 約</div>
+  <h2 style="font-family: var(--serif); font-weight: 300; font-size: clamp(36px, 4.5vw, 72px); color: var(--rice); line-height: 1.1; margin-bottom: 32px; letter-spacing: -0.01em;">
+    Reserve your <span style="font-style: italic; color: var(--ember);">seat</span> this evening.
+  </h2>
+  <a href="https://lounge.oddle.me/en_SG/mizuomakase" class="btn btn-solid"><span>Reserve a Seat</span><span class="arrow">→</span></a>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand"><div class="mark-kanji">水</div><div class="mark-wd">Mizu Omakase</div><p>Where tradition meets the fluid art of sushi.</p></div>
+    <div class="foot-col"><h5>Visit</h5><p>Jaya One</p><p>Petaling Jaya, Malaysia</p><p style="margin-top: 14px;">Tue – Sun</p><p>6:00 PM · 8:30 PM</p></div>
+    <div class="foot-col"><h5>Menu</h5><a href="about.html">About Us</a><a href="menu.html">The Menu</a><a href="contact.html">Contact</a><a href="https://lounge.oddle.me/en_SG/mizuomakase">Reservations</a></div>
+    <div class="foot-col"><h5>Follow</h5><a href="https://www.instagram.com/mizu.omakase/">Instagram</a><a href="https://www.facebook.com/profile.php?id=61584736661621">Facebook</a></div>
+  </div>
+  <div class="foot-bottom"><span>© 2026 Mizu Omakase Sdn. Bhd.</span><span>202501046693 (1648101-W)</span></div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+</script>
+</body>
+</html>

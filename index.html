@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mizu Omakase — Revamp · Two Directions</title>
+<style>
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0eee9; }
+  iframe.dc-frame {
+    width: 100%; height: 100%; border: 0; display: block;
+    background: #0A0908;
+  }
+  .hint {
+    position: fixed;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    z-index: 9999;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(40,30,20,0.6);
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<div id="root"></div>
+<div class="hint">Double-click any board to focus · Drag to reorder · Scroll to zoom</div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+// TWEAKABLE defaults — wired to the edit-mode panel
+const TWEAKS = /*EDITMODE-BEGIN*/{
+  "emberHue": 41,
+  "emberSat": 42,
+  "emberLight": 60,
+  "grain": 22,
+  "kanjiOpacity": 6
+}/*EDITMODE-END*/;
+
+function applyTweaks(t) {
+  // Each iframe gets the tweak variables injected after load
+  const frames = document.querySelectorAll('iframe.dc-frame');
+  frames.forEach(f => {
+    try {
+      const doc = f.contentDocument;
+      if (!doc || !doc.documentElement) return;
+      const r = doc.documentElement;
+      r.style.setProperty('--ember', `hsl(${t.emberHue}, ${t.emberSat}%, ${t.emberLight}%)`);
+      r.style.setProperty('--ember-glow', `hsla(${t.emberHue}, ${t.emberSat}%, ${t.emberLight}%, 0.18)`);
+      // grain overlay
+      const gr = doc.querySelector('.grain');
+      if (gr) gr.style.opacity = (t.grain/100).toFixed(2);
+    } catch (e) {}
+  });
+}
+
+// ---------- Tweaks Panel ----------
+function TweaksPanel({ tweaks, setTweaks, visible }) {
+  if (!visible) return null;
+  const up = (k, v) => {
+    const next = { ...tweaks, [k]: v };
+    setTweaks(next);
+    applyTweaks(next);
+    try {
+      window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { [k]: v } }, '*');
+    } catch (e) {}
+  };
+  const panelStyles = {
+    position: 'fixed', right: 20, bottom: 20, zIndex: 10000,
+    width: 300, background: '#12100E', border: '1px solid rgba(232,223,203,0.14)',
+    padding: '22px 22px 26px',
+    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    color: '#E8DFCB',
+    boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+  };
+  const labelStyle = { fontSize: 10, letterSpacing: '0.28em', textTransform: 'uppercase', color: '#C9A16B', marginBottom: 8, display: 'block' };
+  const rowStyle = { marginBottom: 16 };
+  const titleStyle = { fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontWeight: 300, fontSize: 22, color: '#F4ECD8', marginBottom: 16, letterSpacing: '0.01em' };
+
+  return (
+    <div style={panelStyles}>
+      <div style={titleStyle}>Tweaks <span style={{color: '#C9A16B', fontStyle: 'normal', fontSize: 14, marginLeft: 6}}>·  調整</span></div>
+      <div style={rowStyle}>
+        <span style={labelStyle}>Ember hue · {tweaks.emberHue}°</span>
+        <input type="range" min="0" max="360" value={tweaks.emberHue} onChange={e => up('emberHue', +e.target.value)} style={{width: '100%', accentColor: '#C9A16B'}} />
+      </div>
+      <div style={rowStyle}>
+        <span style={labelStyle}>Ember saturation · {tweaks.emberSat}%</span>
+        <input type="range" min="0" max="100" value={tweaks.emberSat} onChange={e => up('emberSat', +e.target.value)} style={{width: '100%', accentColor: '#C9A16B'}} />
+      </div>
+      <div style={rowStyle}>
+        <span style={labelStyle}>Ember brightness · {tweaks.emberLight}%</span>
+        <input type="range" min="20" max="90" value={tweaks.emberLight} onChange={e => up('emberLight', +e.target.value)} style={{width: '100%', accentColor: '#C9A16B'}} />
+      </div>
+      <div style={rowStyle}>
+        <span style={labelStyle}>Film grain · {tweaks.grain}%</span>
+        <input type="range" min="0" max="60" value={tweaks.grain} onChange={e => up('grain', +e.target.value)} style={{width: '100%', accentColor: '#C9A16B'}} />
+      </div>
+      <div style={rowStyle}>
+        <span style={labelStyle}>Kanji opacity · {tweaks.kanjiOpacity}%</span>
+        <input type="range" min="0" max="30" value={tweaks.kanjiOpacity} onChange={e => up('kanjiOpacity', +e.target.value)} style={{width: '100%', accentColor: '#C9A16B'}} />
+      </div>
+      <div style={{fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(232,223,203,0.5)', marginTop: 12, paddingTop: 12, borderTop: '1px solid rgba(232,223,203,0.14)'}}>
+        Values persist to file
+      </div>
+    </div>
+  );
+}
+
+// ---------- Iframe wrapper that re-applies tweaks on load ----------
+function DCPage({ src, w, h }) {
+  const onLoad = () => applyTweaks(window.__mizuTweaks || TWEAKS);
+  return (
+    <iframe src={src} className="dc-frame" style={{ width: w, height: h }} onLoad={onLoad} />
+  );
+}
+
+// ---------- App ----------
+function App() {
+  const [tweaks, setTweaks] = useState(TWEAKS);
+  const [editMode, setEditMode] = useState(false);
+  window.__mizuTweaks = tweaks;
+
+  useEffect(() => {
+    const onMsg = (e) => {
+      const d = e.data;
+      if (!d || !d.type) return;
+      if (d.type === '__activate_edit_mode') setEditMode(true);
+      if (d.type === '__deactivate_edit_mode') setEditMode(false);
+    };
+    window.addEventListener('message', onMsg);
+    try { window.parent.postMessage({ type: '__edit_mode_available' }, '*'); } catch (e) {}
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+
+  // Artboard dimensions — roughly desktop shape
+  const W = 1280, H = 820;
+
+  return (
+    <>
+      <DesignCanvas>
+        <DCSection id="home" title="Home · Landing Page" subtitle="Two directions, same dark cinematic palette">
+          <DCArtboard id="a" label="A · Ink & Ember (centered, cross-fade)" width={W} height={H}>
+            <DCPage src="home.html" w={W} h={H} />
+          </DCArtboard>
+          <DCArtboard id="b" label="B · Vertical Editorial (split hero, asymmetric)" width={W} height={H}>
+            <DCPage src="home-b.html" w={W} h={H} />
+          </DCArtboard>
+        </DCSection>
+
+        <DCSection id="pages" title="Supporting Pages" subtitle="Shared across both directions">
+          <DCArtboard id="about" label="About · A quiet devotion" width={W} height={H}>
+            <DCPage src="about.html" w={W} h={H} />
+          </DCArtboard>
+          <DCArtboard id="menu" label="Menu · The evening's movements" width={W} height={H}>
+            <DCPage src="menu.html" w={W} h={H} />
+          </DCArtboard>
+          <DCArtboard id="contact" label="Contact · Write to the counter" width={W} height={H}>
+            <DCPage src="contact.html" w={W} h={H} />
+          </DCArtboard>
+        </DCSection>
+      </DesignCanvas>
+
+      <TweaksPanel tweaks={tweaks} setTweaks={setTweaks} visible={editMode} />
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+
+</body>
+</html>
