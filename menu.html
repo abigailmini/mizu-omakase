@@ -104,7 +104,7 @@
 
 .course-row {
   display: grid;
-  grid-template-columns: 80px 1fr 1.3fr 240px;
+  grid-template-columns: 80px 1fr 1.3fr;
   gap: 40px;
   padding: 40px 0;
   border-bottom: 1px solid var(--hair);
@@ -174,12 +174,19 @@
   color: var(--bone);
   max-width: 42ch;
 }
-.course-img-sm {
-  aspect-ratio: 4/3;
-  overflow: hidden;
-}
-.course-img-sm img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.95); transition: transform 800ms; }
-.course-row:hover .course-img-sm img { transform: scale(1.05); }
+.gallery-slider { width: 100%; overflow: hidden; position: relative; }
+.slider-wrap { position: relative; overflow: hidden; }
+.slider-track { display: flex; transition: transform 700ms cubic-bezier(0.4,0,0.2,1); will-change: transform; }
+.slide { min-width: calc(100% / 3); height: 65vh; overflow: hidden; flex-shrink: 0; }
+.slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(10,10,10,0.55); border: 1px solid rgba(255,255,255,0.15); color: var(--rice); width: 48px; height: 48px; border-radius: 50%; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; transition: background 300ms; z-index: 2; }
+.slider-btn:hover { background: rgba(10,10,10,0.85); }
+.slider-btn.prev { left: 20px; }
+.slider-btn.next { right: 20px; }
+.slider-dots { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 2; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.35); cursor: pointer; transition: background 300ms; }
+.dot.active { background: var(--rice); }
+@media (max-width: 768px) { .slide { min-width: 85%; } }
 
 .pairings {
   padding: 120px var(--pad);
@@ -293,7 +300,6 @@
 @media (max-width: 900px) {
   .menu-intro-grid { grid-template-columns: 1fr; gap: 40px; }
   .course-row { grid-template-columns: 1fr; gap: 20px; padding: 32px 0; }
-  .course-img-sm { aspect-ratio: 16/10; }
   .pair-inner, .supp-grid { grid-template-columns: 1fr; gap: 40px; }
 }
 </style>
@@ -371,7 +377,6 @@
       <div class="jp">先付</div>
     </div>
     <div class="course-desc">A single jewel of the season, arriving quietly before the evening begins.</div>
-    <div class="course-img-sm"><img src="images/dish-17.jpg" alt="Appetizer" /></div>
   </div>
 
   <div class="course-row">
@@ -382,7 +387,6 @@
       <div class="jp">向付</div>
     </div>
     <div class="course-desc">Ocean-fresh cuts laid bare, each slice a quiet conversation with the sea.</div>
-    <div class="course-img-sm"><img src="images/dish-23.jpg" alt="Sashimi" /></div>
   </div>
 
   <div class="course-row">
@@ -393,7 +397,6 @@
       <div class="jp">旬の一品</div>
     </div>
     <div class="course-desc">A fleeting expression of today's market, coaxed into something memorable.</div>
-    <div class="course-img-sm"><img src="images/dish-45.jpg" alt="Seasonal Dish" /></div>
   </div>
 
   <div class="course-row">
@@ -404,7 +407,6 @@
       <div class="jp">焼物</div>
     </div>
     <div class="course-desc">Kissed by fire until the skin blisters and caramelises into gold.</div>
-    <div class="course-img-sm"><img src="images/dish-46.jpg" alt="Yakimono" /></div>
   </div>
 
   <div class="course-row">
@@ -415,7 +417,6 @@
       <div class="jp">煮物</div>
     </div>
     <div class="course-desc">Slow-simmered in dashi until everything tender surrenders to the broth.</div>
-    <div class="course-img-sm"><img src="images/dish-54.jpg" alt="Nimono" /></div>
   </div>
 
   <div class="course-row">
@@ -426,7 +427,6 @@
       <div class="jp">鮨五種</div>
     </div>
     <div class="course-desc">Five nigiri, five moods — the counter's own quiet composition.</div>
-    <div class="course-img-sm"><img src="images/dish-80.jpg" alt="Sushi 5 Kind" /></div>
   </div>
 
   <div class="course-row">
@@ -437,7 +437,6 @@
       <div class="jp">止椀</div>
     </div>
     <div class="course-desc">A warming bowl to close the savoury chapter, gentle and pure.</div>
-    <div class="course-img-sm"><img src="images/dish-9.jpg" alt="Tomewan" /></div>
   </div>
 
   <div class="course-row">
@@ -448,8 +447,50 @@
       <div class="jp">甘味</div>
     </div>
     <div class="course-desc">A small sweetness to carry you out gently into the night.</div>
-    <div class="course-img-sm"><img src="images/hero-counter.jpg" alt="Dessert" /></div>
   </div>
+
+  <section class="gallery-slider" style="margin: 80px 0;">
+    <div class="slider-wrap">
+      <div class="slider-track" id="menuSliderTrack">
+        <div class="slide"><img src="images/extra/MizuOmakase-6.jpg" alt="Mizu Omakase" loading="lazy"/></div>
+        <div class="slide"><img src="images/extra/MizuOmakase-12.jpg" alt="Mizu Omakase" loading="lazy"/></div>
+        <div class="slide"><img src="images/extra/MizuOmakase-13.jpg" alt="Mizu Omakase" loading="lazy"/></div>
+        <div class="slide"><img src="images/extra/MizuOmakase-17.jpg" alt="Mizu Omakase" loading="lazy"/></div>
+        <div class="slide"><img src="images/extra/MizuOmakase-24.jpg" alt="Mizu Omakase" loading="lazy"/></div>
+        <div class="slide"><img src="images/extra/MizuOmakase-26.jpg" alt="Mizu Omakase" loading="lazy"/></div>
+        <div class="slide"><img src="images/extra/MizuOmakase-41.jpg" alt="Mizu Omakase" loading="lazy"/></div>
+        <div class="slide"><img src="images/extra/MizuOmakase-47.jpg" alt="Mizu Omakase" loading="lazy"/></div>
+      </div>
+      <button class="slider-btn prev" id="menuSliderPrev">&#8592;</button>
+      <button class="slider-btn next" id="menuSliderNext">&#8594;</button>
+      <div class="slider-dots" id="menuSliderDots"></div>
+    </div>
+  </section>
+  <script>
+  (function(){
+    const track = document.getElementById('menuSliderTrack');
+    const dotsEl = document.getElementById('menuSliderDots');
+    const slides = track.querySelectorAll('.slide');
+    let cur = 0, total = slides.length - 2, timer;
+    slides.forEach((_,i) => {
+      const d = document.createElement('span');
+      d.className = 'dot' + (i===0?' active':'');
+      d.onclick = () => go(i);
+      dotsEl.appendChild(d);
+    });
+    function go(n) {
+      cur = (n + total) % total;
+      track.style.transform = `translateX(-${cur * (100/3)}%)`;
+      dotsEl.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i===cur));
+      clearInterval(timer); timer = setInterval(() => go(cur+1), 4000);
+    }
+    document.getElementById('menuSliderPrev').onclick = () => go(cur-1);
+    document.getElementById('menuSliderNext').onclick = () => go(cur+1);
+    let tx=0; track.parentElement.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+    track.parentElement.addEventListener('touchend',e=>{ if(tx-e.changedTouches[0].clientX>50) go(cur+1); else if(e.changedTouches[0].clientX-tx>50) go(cur-1); });
+    timer = setInterval(() => go(cur+1), 4000);
+  })();
+  </script>
 
   <!-- ═══ KEIRYU ═══ -->
   <div class="menu-section-head">
@@ -466,7 +507,6 @@
       <div class="jp">椀</div>
     </div>
     <div class="course-desc">A clear broth that opens the senses with restraint and precision.</div>
-    <div class="course-img-sm"><img src="images/dish-17.jpg" alt="Owan" /></div>
   </div>
 
   <div class="course-row">
@@ -477,7 +517,6 @@
       <div class="jp">先付</div>
     </div>
     <div class="course-desc">Season's first notes arranged with care on the edge of the lacquer.</div>
-    <div class="course-img-sm"><img src="images/dish-23.jpg" alt="Appetizer" /></div>
   </div>
 
   <div class="course-row">
@@ -488,7 +527,6 @@
       <div class="jp">向付</div>
     </div>
     <div class="course-desc">Premium cuts drawn straight from the morning's arrival, unadorned.</div>
-    <div class="course-img-sm"><img src="images/dish-45.jpg" alt="Sashimi" /></div>
   </div>
 
   <div class="course-row">
@@ -499,7 +537,6 @@
       <div class="jp">旬の料理</div>
     </div>
     <div class="course-desc">The chef's response to what the season insisted on offering today.</div>
-    <div class="course-img-sm"><img src="images/dish-46.jpg" alt="Seasonal Dish" /></div>
   </div>
 
   <div class="course-row">
@@ -510,7 +547,6 @@
       <div class="jp">焼物</div>
     </div>
     <div class="course-desc">Flame-touched, skin crisped, resting in its own lingering warmth.</div>
-    <div class="course-img-sm"><img src="images/dish-54.jpg" alt="Yakimono" /></div>
   </div>
 
   <div class="course-row">
@@ -521,7 +557,6 @@
       <div class="jp">鮨三貫</div>
     </div>
     <div class="course-desc">Three considered nigiri — the counter speaking at its most precise.</div>
-    <div class="course-img-sm"><img src="images/dish-80.jpg" alt="Sushi 3 Kind" /></div>
   </div>
 
   <div class="course-row">
@@ -532,7 +567,6 @@
       <div class="jp">雲丹食べ比べ</div>
     </div>
     <div class="course-desc">A gentle introduction to the sea's most elusive and luminous treasure.</div>
-    <div class="course-img-sm"><img src="images/dish-9.jpg" alt="Uni Tasting" /></div>
   </div>
 
   <div class="course-row">
@@ -543,7 +577,6 @@
       <div class="jp">止椀</div>
     </div>
     <div class="course-desc">The final broth, soft and resolving, a quiet full stop to the savoury act.</div>
-    <div class="course-img-sm"><img src="images/hero-counter.jpg" alt="Tomewan" /></div>
   </div>
 
   <div class="course-row">
@@ -554,7 +587,6 @@
       <div class="jp">甘味</div>
     </div>
     <div class="course-desc">Something cool and delicate to end the evening with grace.</div>
-    <div class="course-img-sm"><img src="images/dish-17.jpg" alt="Dessert" /></div>
   </div>
 
   <!-- ═══ OGAWA ═══ -->
@@ -572,7 +604,6 @@
       <div class="jp">食前酒</div>
     </div>
     <div class="course-desc">Begin with something sparkling — the evening opening its arms.</div>
-    <div class="course-img-sm"><img src="images/dish-23.jpg" alt="Welcome Drink" /></div>
   </div>
 
   <div class="course-row">
@@ -583,7 +614,6 @@
       <div class="jp">椀</div>
     </div>
     <div class="course-desc">The dashi here arrives as ceremony, a bowl of pure intention.</div>
-    <div class="course-img-sm"><img src="images/dish-45.jpg" alt="Owan" /></div>
   </div>
 
   <div class="course-row">
@@ -594,7 +624,6 @@
       <div class="jp">先付三品</div>
     </div>
     <div class="course-desc">Three small studies in contrast — bitter, rich, and bright.</div>
-    <div class="course-img-sm"><img src="images/dish-46.jpg" alt="Appetizer" /></div>
   </div>
 
   <div class="course-row">
@@ -605,7 +634,6 @@
       <div class="jp">造里</div>
     </div>
     <div class="course-desc">The first cut of the sea, laid with reverence on chilled stone.</div>
-    <div class="course-img-sm"><img src="images/dish-54.jpg" alt="Sashimi" /></div>
   </div>
 
   <div class="course-row">
@@ -616,7 +644,6 @@
       <div class="jp">造里（二）</div>
     </div>
     <div class="course-desc">A second dialogue with the ocean, deeper and more expressive.</div>
-    <div class="course-img-sm"><img src="images/dish-80.jpg" alt="Sashimi 2nd" /></div>
   </div>
 
   <div class="course-row">
@@ -627,7 +654,6 @@
       <div class="jp">雲丹一品</div>
     </div>
     <div class="course-desc">A single mouthful of Hokkaido's finest — gold, briny, and fleeting.</div>
-    <div class="course-img-sm"><img src="images/dish-9.jpg" alt="Uni Bite" /></div>
   </div>
 
   <div class="course-row">
@@ -638,7 +664,6 @@
       <div class="jp">焼き物</div>
     </div>
     <div class="course-desc">Flame disciplines the surface while the interior remains yielding.</div>
-    <div class="course-img-sm"><img src="images/hero-counter.jpg" alt="Yakimono" /></div>
   </div>
 
   <div class="course-row">
@@ -649,7 +674,6 @@
       <div class="jp">煮物</div>
     </div>
     <div class="course-desc">Patient simmering yields a depth that only time and dashi can build.</div>
-    <div class="course-img-sm"><img src="images/dish-17.jpg" alt="Nimono" /></div>
   </div>
 
   <div class="course-row">
@@ -660,7 +684,6 @@
       <div class="jp">鮨</div>
     </div>
     <div class="course-desc">Nigiri pressed at the counter's edge, warm rice meeting cold fish.</div>
-    <div class="course-img-sm"><img src="images/dish-23.jpg" alt="Sushi" /></div>
   </div>
 
   <div class="course-row">
@@ -671,7 +694,6 @@
       <div class="jp">雲丹食べ比べ</div>
     </div>
     <div class="course-desc">Compare origins, compare moods — the sea rendered in spectrum.</div>
-    <div class="course-img-sm"><img src="images/dish-45.jpg" alt="Uni Tasting" /></div>
   </div>
 
   <div class="course-row">
@@ -682,7 +704,6 @@
       <div class="jp">手巻き</div>
     </div>
     <div class="course-desc">Nori snapping, rice spilling — the informality of pure pleasure.</div>
-    <div class="course-img-sm"><img src="images/dish-46.jpg" alt="Hand Roll" /></div>
   </div>
 
   <div class="course-row">
@@ -693,7 +714,6 @@
       <div class="jp">止椀</div>
     </div>
     <div class="course-desc">A closing broth to anchor the ritual before stillness arrives.</div>
-    <div class="course-img-sm"><img src="images/dish-54.jpg" alt="Soup" /></div>
   </div>
 
   <div class="course-row">
@@ -704,7 +724,6 @@
       <div class="jp">お口直し</div>
     </div>
     <div class="course-desc">A breath between acts — cool, acidic, precise.</div>
-    <div class="course-img-sm"><img src="images/dish-80.jpg" alt="Palate Cleanser" /></div>
   </div>
 
   <div class="course-row">
@@ -715,7 +734,6 @@
       <div class="jp">甘味</div>
     </div>
     <div class="course-desc">The evening's final note, soft and unhurried, sweetly earned.</div>
-    <div class="course-img-sm"><img src="images/dish-9.jpg" alt="Dessert" /></div>
   </div>
 
 </section>
