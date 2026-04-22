@@ -615,6 +615,69 @@
   color: var(--ember);
 }
 
+/* ============ PHOTO GALLERY ============ */
+.gallery {
+  padding: clamp(80px, 10vw, 140px) var(--pad);
+  background: var(--ink);
+}
+.gallery-head {
+  max-width: 1400px;
+  margin: 0 auto 56px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
+.gallery-head h2 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(32px, 4vw, 60px);
+  line-height: 1.05;
+  color: var(--rice);
+  letter-spacing: -0.015em;
+}
+.gallery-head h2 .it { font-style: italic; color: var(--ember); }
+.gallery-head p {
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--bone-dim);
+  font-style: italic;
+  max-width: 30ch;
+  text-align: right;
+}
+.gallery-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  gap: 12px;
+}
+.g-cell {
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+.g-cell img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 1000ms cubic-bezier(.2,.7,.2,1), filter 600ms;
+  filter: brightness(0.9) saturate(0.92);
+}
+.g-cell:hover img {
+  transform: scale(1.06);
+  filter: brightness(1.04) saturate(1.05);
+}
+.g-cell.tall { grid-row: span 2; }
+.g-cell.wide { grid-column: span 2; }
+@media (max-width: 900px) {
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  .g-cell.tall, .g-cell.wide { grid-row: span 1; grid-column: span 1; }
+  .gallery-head { flex-direction: column; align-items: flex-start; }
+  .gallery-head p { text-align: left; }
+}
+
 /* ============ PRESS ============ */
 .press {
   padding: 100px var(--pad);
@@ -1109,6 +1172,27 @@
         <li>Myōga flower <span class="origin">Local</span></li>
       </ul>
     </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+  <div class="gallery-head">
+    <div class="reveal">
+      <div class="eyebrow" style="margin-bottom: 16px;">The Craft · 写 真</div>
+      <h2>Moments from<br/>the <span class="it">counter</span>.</h2>
+    </div>
+    <p class="reveal delay-1">Each plate, each course — captured in the quiet before service.</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="g-cell tall reveal"><img src="images/extra/MizuOmakase-6.jpg" alt="Mizu Omakase" loading="lazy" /></div>
+    <div class="g-cell reveal delay-1"><img src="images/extra/MizuOmakase-12.jpg" alt="Mizu Omakase" loading="lazy" /></div>
+    <div class="g-cell reveal delay-2"><img src="images/extra/MizuOmakase-13.jpg" alt="Mizu Omakase" loading="lazy" /></div>
+    <div class="g-cell reveal delay-1"><img src="images/extra/MizuOmakase-17.jpg" alt="Mizu Omakase" loading="lazy" /></div>
+    <div class="g-cell reveal delay-2"><img src="images/extra/MizuOmakase-24.jpg" alt="Mizu Omakase" loading="lazy" /></div>
+    <div class="g-cell wide reveal delay-3"><img src="images/extra/MizuOmakase-26.jpg" alt="Mizu Omakase" loading="lazy" /></div>
+    <div class="g-cell reveal delay-1"><img src="images/extra/MizuOmakase-41.jpg" alt="Mizu Omakase" loading="lazy" /></div>
+    <div class="g-cell reveal delay-2"><img src="images/extra/MizuOmakase-47.jpg" alt="Mizu Omakase" loading="lazy" /></div>
   </div>
 </section>
 
