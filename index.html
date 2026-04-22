@@ -850,8 +850,9 @@
   }
   .course-rail, .season-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
   .press-logos { grid-template-columns: repeat(2, 1fr); gap: 32px; }
-  .stats-row { grid-template-columns: 1fr; gap: 40px; }
-  .stats-row .divider { display: none; }
+  .stats-row { grid-template-columns: 1fr 1px 1fr 1px 1fr; gap: 16px; }
+  .stat-item .num { font-size: 36px; }
+  .stat-item .lbl { font-size: 9px; }
   .reserve-details { grid-template-columns: 1fr; }
   .reserve-details > div { border-right: none; border-bottom: 1px solid var(--hair); }
 }
