@@ -918,10 +918,22 @@
     <img src="images/logo.png" alt="Mizu Omakase" style="height:108px;width:auto;display:block;" />
   </a>
   <div class="nav-right">
-    
     <a href="https://reservation.umai.io/en/widget/mizu-omakase" class="navlink nav-reserve" style="color: var(--ember); border: 1px solid var(--ember); padding: 10px 18px;">Reserve</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-mobile-drawer" id="navDrawer">
+  <a href="/" class="active">Home</a>
+  <a href="about.html">About</a>
+  <a href="menu.html">Menu</a>
+  <a href="contact.html">Contact</a>
+  <a href="/blog/">Journal</a>
+  <a href="https://reservation.umai.io/en/widget/mizu-omakase" class="drawer-reserve">Reserve a Seat</a>
+</div>
 
 <!-- STICKY RESERVE DOCK -->
 <div class="reserve-dock">
@@ -965,8 +977,7 @@
         <a href="https://reservation.umai.io/en/widget/mizu-omakase" class="btn btn-solid"><span>Reserve a Seat</span><span class="arrow">→</span></a>
         <a href="about.html" class="btn"><span>Our Philosophy</span></a>
       </div>
-      <div style="margin-top:20px; font-size:13px; letter-spacing:0.12em; color:var(--ember); text-transform:uppercase;">From RM 279++ &nbsp;&middot;&nbsp; Up to RM 679++
-      </div>
+
       <div class="hero-indicator">
         <span>Scroll</span>
         <span class="tick"></span>
@@ -1375,5 +1386,25 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   timer = setInterval(() => go(cur+1), 4000);
 })();
 </script>
+<script>
+// Hamburger menu
+const hamburger = document.getElementById('navHamburger');
+const drawer = document.getElementById('navDrawer');
+if (hamburger && drawer) {
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    drawer.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  });
+  drawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+}
+</script>
 </body>
 </html>
+
