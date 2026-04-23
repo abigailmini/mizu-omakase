@@ -360,11 +360,76 @@ footer {
 }
 
 /* ---------- Responsive ---------- */
+/* ================= HAMBURGER ================= */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  z-index: 90;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--rice);
+  transition: transform 300ms, opacity 300ms;
+  transform-origin: center;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.nav-mobile-drawer {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(10,9,8,0.97);
+  backdrop-filter: blur(16px);
+  z-index: 79;
+  padding: 110px 32px 48px;
+  flex-direction: column;
+  gap: 0;
+  border-bottom: 1px solid var(--hair);
+}
+.nav-mobile-drawer.open { display: flex; }
+.nav-mobile-drawer a {
+  font-family: var(--sans);
+  font-size: 13px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--bone);
+  padding: 18px 0;
+  border-bottom: 1px solid var(--hair);
+  transition: color 260ms;
+}
+.nav-mobile-drawer a:last-child { border-bottom: none; }
+.nav-mobile-drawer a:hover, .nav-mobile-drawer a.active { color: var(--ember); }
+.nav-mobile-drawer .drawer-reserve {
+  margin-top: 28px;
+  display: inline-block;
+  color: var(--ember) !important;
+  border: 1px solid var(--ember) !important;
+  padding: 14px 24px;
+  text-align: center;
+  letter-spacing: 0.28em;
+}
+
 @media (max-width: 900px) {
   .nav { grid-template-columns: auto 1fr auto; padding: 18px 20px; }
   .nav-left { display: none; }
   .nav-right { gap: 14px; }
   .nav-right a.navlink:not(.nav-reserve) { display: none; }
+  .nav-right .nav-reserve { display: none; }
+  .nav-hamburger { display: flex; }
   .foot-grid { grid-template-columns: 1fr 1fr; }
   .reserve-dock .dock-label { display: none; }
+  .hero-sub { font-size: 14px !important; max-width: 30ch; }
 }
+
