@@ -30,7 +30,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
 body {
   background: var(--ink);
   color: var(--bone);
@@ -432,4 +432,5 @@ footer {
   .reserve-dock .dock-label { display: none; }
   .hero-sub { font-size: 14px !important; max-width: 30ch; }
 }
+
 
