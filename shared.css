@@ -436,17 +436,16 @@ footer {
 @media (max-width: 600px) {
   /* Lock page width — nothing bleeds out */
   body, html { overflow-x: hidden; max-width: 100%; }
-  * { max-width: 100%; }
-  img, video, iframe { max-width: 100% !important; }
 
   /* Hero fixes */
-  .hero-indicator { display: none; }
-  .hero-frame-counter { display: none; }
-  .hero-top .locale:last-child { display: none; }
+  .hero-indicator { display: none !important; }
+  .hero-frame-counter { display: none !important; }
+  .hero-locale-right { display: none !important; }
   .hero-bottom {
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
+    justify-content: flex-start;
   }
   .hero-ctas {
     flex-wrap: wrap;
@@ -467,6 +466,7 @@ footer {
   .hero-inner {
     padding-left: 20px;
     padding-right: 20px;
+    overflow: hidden;
   }
 }
 
