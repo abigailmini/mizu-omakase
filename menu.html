@@ -305,14 +305,103 @@
   font-size: 20px;
 }
 
+/* --- Lunch / Dinner subsections --- */
+.menu-section-head { text-align: center; margin: 90px 0 40px; }
+.menu-section-head .seg-jp {
+  font-family: var(--jp);
+  font-size: 20px;
+  color: var(--ember);
+  letter-spacing: 0.3em;
+}
+.menu-section-head h3 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(30px, 4vw, 52px);
+  color: var(--rice);
+  margin-top: 10px;
+  letter-spacing: -0.01em;
+}
+.menu-section-head h3 .it { font-style: italic; color: var(--ember); }
+.lunch-note {
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ember);
+  margin: -20px auto 44px;
+  max-width: 52ch;
+}
+
+/* 4-up grid for dinner */
+.menu-cards-4 { grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.menu-cards-4 .menu-card { padding: 36px 24px; }
+
+/* choice-of-one sub line inside a course row */
+.menu-card-courses li.li-block {
+  display: block;
+}
+.li-choice {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 12.5px;
+  color: var(--bone-dim);
+  margin-top: 5px;
+  line-height: 1.5;
+}
+
+/* add-on / upgrade note inside a card */
+.menu-card-note {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  line-height: 1.7;
+  color: var(--bone-dim);
+  border-top: 1px dashed var(--hair);
+  padding-top: 16px;
+  margin-bottom: 22px;
+}
+.menu-card-note strong {
+  color: var(--ember);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 9.5px;
+  display: block;
+  margin-bottom: 7px;
+}
+
+/* PDF download link */
+.menu-download { text-align: center; margin: 72px 0 0; }
+.menu-download a {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ember);
+  text-decoration: none;
+  border: 1px solid var(--ember);
+  padding: 14px 26px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 300ms, color 300ms;
+}
+.menu-download a:hover { background: var(--ember); color: var(--ink); }
+
+@media (max-width: 1100px) {
+  .menu-cards-4 { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+}
 @media (max-width: 900px) {
   .menu-intro-grid { grid-template-columns: 1fr; gap: 40px; }
   .menu-cards { grid-template-columns: 1fr; gap: 32px; }
   .pair-inner, .supp-grid { grid-template-columns: 1fr; gap: 40px; }
 }
+@media (max-width: 640px) {
+  .menu-cards-4 { grid-template-columns: 1fr; }
+}
 </style>
-<meta property="og:title" content="Our Menu | Mizu Omakase | Omakase PJ from RM279++" />
-<meta property="og:description" content="Choose from 3 omakase menus: Uteki RM279++, Keiryu RM479++, Ogawa RM679++. Premium sake available. Book at Jaya One, Petaling Jaya." />
+<meta property="og:title" content="Our Menu | Mizu Omakase | Omakase PJ from RM139++" />
+<meta property="og:description" content="Lunch from RM139++ (Ranchi, Tsuki, Hi) and dinner omakase from RM279++ (Uteki, Shizuku, Kiwami, Ogawa RM679++). Premium sake available. Book at Jaya One, Petaling Jaya." />
 <meta property="og:image" content="https://www.mizuomakase.com.my/images/hero-counter.jpg" />
 <meta property="og:url" content="https://www.mizuomakase.com.my/menu.html" />
 <meta property="og:type" content="website" />
@@ -360,11 +449,11 @@
   <div class="menu-intro-grid">
     <div>
       <h5>Menus</h5>
-      <p>3 Experiences</p>
+      <p>3 Lunch · 4 Dinner</p>
     </div>
     <div>
       <h5>Pricing</h5>
-      <p>From RM 279<span style="font-size: 0.7em; color: var(--bone-dim)">++</span> to RM 679<span style="font-size: 0.7em; color: var(--bone-dim)">++</span></p>
+      <p>From RM 139<span style="font-size: 0.7em; color: var(--bone-dim)">++</span> to RM 679<span style="font-size: 0.7em; color: var(--bone-dim)">++</span></p>
     </div>
     <div>
       <h5>Duration</h5>
@@ -379,7 +468,96 @@
     <h2>Choose your <span class="it">experience</span>.</h2>
   </div>
 
+  <!-- ===================== LUNCH ===================== -->
+  <div class="menu-section-head">
+    <div class="seg-jp">昼 · Hiru</div>
+    <h3>Lunch <span class="it">Menus</span></h3>
+  </div>
+  <p class="lunch-note">*Available for weekday lunch only — except public holidays &amp; special events.</p>
+
   <div class="menu-cards">
+
+    <!-- RANCHI -->
+    <div class="menu-card">
+      <div class="menu-card-top">
+        <div class="menu-card-kanji">昼</div>
+        <div class="menu-card-name">RANCHI</div>
+        <div class="menu-card-sub">Lunch Menu</div>
+        <div class="menu-card-price">RM 139<sup>++</sup></div>
+      </div>
+      <ul class="menu-card-courses">
+        <li>Appetizer <span class="jp-sm">先付一品</span></li>
+        <li>Cawanmushi <span class="jp-sm">茶碗蒸し</span></li>
+        <li class="li-block">Chef Selection · 6 Seasonal Nigiri Sushi <span class="jp-sm">握り寿司6貫</span>
+          <div class="li-choice">Upgrade · Premium Selection Sushi (incl. Uni, Tuna, Foie Gras) +RM68</div>
+        </li>
+        <li class="li-block">Hot Dish · Sakana No Nitsuke <span class="jp-sm">魚の煮付け</span></li>
+        <li>Soup <span class="jp-sm">止椀</span></li>
+        <li>Dessert <span class="jp-sm">甘味</span></li>
+      </ul>
+      <div class="menu-card-note">
+        <strong>Add-on</strong>
+        Engawa Mini Don (RM58) · Truffle Capellini (RM88) · Miyazaki A5 Sukiyaki (RM68)
+      </div>
+      <a href="https://reservation.umai.io/en/widget/mizu-omakase" class="btn btn-solid" style="width:100%;justify-content:center;margin-top:auto;">Reserve</a>
+    </div>
+
+    <!-- TSUKI -->
+    <div class="menu-card menu-card-featured">
+      <div class="menu-card-top">
+        <div class="menu-card-kanji">月</div>
+        <div class="menu-card-name">TSUKI</div>
+        <div class="menu-card-sub">Lunch Menu</div>
+        <div class="menu-card-price">RM 279<sup>++</sup></div>
+      </div>
+      <ul class="menu-card-courses">
+        <li>Appetizer <span class="jp-sm">先付</span></li>
+        <li>Sashimi <span class="jp-sm">造里</span></li>
+        <li>Cawanmushi <span class="jp-sm">茶碗蒸し</span></li>
+        <li>Sushi 6 Kinds <span class="jp-sm">鮨 六貫</span></li>
+        <li>Nimono <span class="jp-sm">旬の煮物</span></li>
+        <li>Tomewan <span class="jp-sm">止椀</span></li>
+        <li>Dessert <span class="jp-sm">甘味</span></li>
+      </ul>
+      <div class="menu-card-note">
+        <strong>Add-on</strong>
+        Engawa Mini Don (RM58) · Truffle Capellini (RM88) · Miyazaki A5 Sukiyaki (RM68)
+      </div>
+      <a href="https://reservation.umai.io/en/widget/mizu-omakase" class="btn btn-solid" style="width:100%;justify-content:center;margin-top:auto;">Reserve</a>
+    </div>
+
+    <!-- HI -->
+    <div class="menu-card">
+      <div class="menu-card-top">
+        <div class="menu-card-kanji">日</div>
+        <div class="menu-card-name">HI</div>
+        <div class="menu-card-sub">Lunch Menu</div>
+        <div class="menu-card-price">RM 479<sup>++</sup></div>
+      </div>
+      <ul class="menu-card-courses">
+        <li>Appetizer <span class="jp-sm">先付</span></li>
+        <li>Sunomono <span class="jp-sm">酢の物</span></li>
+        <li>Sashimi <span class="jp-sm">造里</span></li>
+        <li>Seasonal Dish <span class="jp-sm">旬の一品</span></li>
+        <li>Sushi 5 Kinds <span class="jp-sm">鮨 五貫</span></li>
+        <li class="li-block">Yakimono <span class="jp-sm">焼物</span>
+          <div class="li-choice">Choice of one · Wagyu Yaki-Suki 和牛焼きすき &nbsp;/&nbsp; Hotate Yako 帆立焼き</div>
+        </li>
+        <li>Tomewan <span class="jp-sm">止椀</span></li>
+        <li>Dessert <span class="jp-sm">甘味</span></li>
+      </ul>
+      <a href="https://reservation.umai.io/en/widget/mizu-omakase" class="btn btn-solid" style="width:100%;justify-content:center;margin-top:auto;">Reserve</a>
+    </div>
+
+  </div>
+
+  <!-- ===================== DINNER ===================== -->
+  <div class="menu-section-head">
+    <div class="seg-jp">夜 · Yoru</div>
+    <h3>Dinner <span class="it">Menus</span></h3>
+  </div>
+
+  <div class="menu-cards menu-cards-4">
 
     <!-- UTEKI -->
     <div class="menu-card">
@@ -401,23 +579,45 @@
       <a href="https://reservation.umai.io/en/widget/mizu-omakase" class="btn btn-solid" style="width:100%;justify-content:center;margin-top:auto;">Reserve</a>
     </div>
 
-    <!-- KEIRYU -->
+    <!-- SHIZUKU -->
+    <div class="menu-card">
+      <div class="menu-card-top">
+        <div class="menu-card-kanji">雫</div>
+        <div class="menu-card-name">SHIZUKU</div>
+        <div class="menu-card-sub">Cooked Menu</div>
+        <div class="menu-card-price">RM 279<sup>++</sup></div>
+      </div>
+      <ul class="menu-card-courses">
+        <li>Ochatsuke <span class="jp-sm">お茶漬け</span></li>
+        <li>Appetizer <span class="jp-sm">先付</span></li>
+        <li>Seasonal Dish <span class="jp-sm">旬の一品</span></li>
+        <li>Yakimono <span class="jp-sm">焼物</span></li>
+        <li>Nimono <span class="jp-sm">煮物</span></li>
+        <li>Sushi 3 Kinds <span class="jp-sm">鮨三貫</span></li>
+        <li>Menrui <span class="jp-sm">麺料理</span></li>
+        <li>Tomewan (Soup) <span class="jp-sm">止椀</span></li>
+        <li>Dessert <span class="jp-sm">甘味</span></li>
+      </ul>
+      <a href="https://reservation.umai.io/en/widget/mizu-omakase" class="btn btn-solid" style="width:100%;justify-content:center;margin-top:auto;">Reserve</a>
+    </div>
+
+    <!-- KIWAMI -->
     <div class="menu-card menu-card-featured">
       <div class="menu-card-top">
-        <div class="menu-card-kanji">渓</div>
-        <div class="menu-card-name">KEIRYU</div>
-        <div class="menu-card-sub">A Gentle Uni Experience</div>
+        <div class="menu-card-kanji">極</div>
+        <div class="menu-card-name">KIWAMI</div>
+        <div class="menu-card-sub">The Ultimate Nigiri Experience</div>
         <div class="menu-card-price">RM 479<sup>++</sup></div>
       </div>
       <ul class="menu-card-courses">
-        <li>Owan <span class="jp-sm">椀</span></li>
         <li>Appetizer <span class="jp-sm">先付</span></li>
-        <li>Sashimi <span class="jp-sm">向付</span></li>
-        <li>Seasonal Dish <span class="jp-sm">旬の料理</span></li>
+        <li>Chef's Selection Sashimi <span class="jp-sm">刺し身</span></li>
+        <li>Nigiri 3 Kinds <span class="jp-sm">握り三貫</span></li>
+        <li>Nimono <span class="jp-sm">煮物</span></li>
+        <li>Nigiri 3 Kinds <span class="jp-sm">握り三貫</span></li>
         <li>Yakimono <span class="jp-sm">焼物</span></li>
-        <li>Sushi 3 Kind <span class="jp-sm">鮨三貫</span></li>
-        <li>Uni Tasting <span class="jp-sm">雲丹食べ比べ</span></li>
-        <li>Tomewan <span class="jp-sm">止椀</span></li>
+        <li>Premium Nigiri 3 Kinds <span class="jp-sm">特上握り三貫</span></li>
+        <li>Dobin Mushi <span class="jp-sm">土瓶蒸し</span></li>
         <li>Dessert <span class="jp-sm">甘味</span></li>
       </ul>
       <a href="https://reservation.umai.io/en/widget/mizu-omakase" class="btn btn-solid" style="width:100%;justify-content:center;margin-top:auto;">Reserve</a>
@@ -428,7 +628,7 @@
       <div class="menu-card-top">
         <div class="menu-card-kanji">川</div>
         <div class="menu-card-name">OGAWA</div>
-        <div class="menu-card-sub">A Sea Urchin Omakase Experience</div>
+        <div class="menu-card-sub">Sea Urchin Omakase Course · 雲丹おまかせ</div>
         <div class="menu-card-price">RM 679<sup>++</sup></div>
       </div>
       <ul class="menu-card-courses">
@@ -436,19 +636,23 @@
         <li>Owan <span class="jp-sm">椀</span></li>
         <li>Appetizer (3 kinds) <span class="jp-sm">先付三品</span></li>
         <li>Sashimi <span class="jp-sm">造里</span></li>
-        <li>Uni Bite <span class="jp-sm">雲丹一品</span></li>
+        <li>Uni Tasting Box <span class="jp-sm">雲丹食べ比べ</span></li>
         <li>Yakimono <span class="jp-sm">焼き物</span></li>
         <li>Nimono <span class="jp-sm">煮物</span></li>
-        <li>Sashimi (2nd) <span class="jp-sm">造里（二）</span></li>
-        <li>Uni Tasting <span class="jp-sm">雲丹食べ比べ</span></li>
-        <li>Hand Roll <span class="jp-sm">手巻き</span></li>
-        <li>Soup <span class="jp-sm">止椀</span></li>
         <li>Palate Cleanser <span class="jp-sm">お口直し</span></li>
+        <li>Uni Bite <span class="jp-sm">雲丹の一口</span></li>
+        <li>Sushi 3 Kind <span class="jp-sm">鮨三貫</span></li>
+        <li>Sushi Handroll <span class="jp-sm">手巻き</span></li>
+        <li>Soup <span class="jp-sm">止椀</span></li>
         <li>Dessert <span class="jp-sm">甘味</span></li>
       </ul>
       <a href="https://reservation.umai.io/en/widget/mizu-omakase" class="btn btn-solid" style="width:100%;justify-content:center;margin-top:auto;">Reserve</a>
     </div>
 
+  </div>
+
+  <div class="menu-download">
+    <a href="/mizu-menu-oct2026.pdf" target="_blank" rel="noopener">⬇ Download Full Menu (PDF)</a>
   </div>
 
   <section class="gallery-slider" style="margin: 80px 0;">
